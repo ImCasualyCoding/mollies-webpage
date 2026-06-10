@@ -325,7 +325,8 @@ h1 {
 .image-transition-box {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    /* Changed from 4 / 3 to 3 / 4 to make the window taller for portrait photos */
+    aspect-ratio: 3 / 4; 
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
