@@ -2,20 +2,17 @@
    VARIABLES & THEME SETUP
    ========================================= */
 :root {
-    /* Colors: Elevated Coastal Palette */
-    --deep-palm: #0a2e22;      /* Ultra-high contrast dark green for text */
-    --ocean-teal: #1a6b5e;     /* Primary brand color */
-    --warm-sand: #fbf9f4;      /* Soft, glare-free background */
-    --sun-glow: #f4d08b;       /* Tropical warmth */
+    --deep-palm: #0a2e22;      
+    --ocean-teal: #1a6b5e;     
+    --warm-sand: #fbf9f4;      
+    --sun-glow: #f4d08b;       
     --white: #ffffff;
     
-    /* Typography */
     --font-display: 'Fraunces', serif;
     --font-body: 'DM Sans', sans-serif;
     
-    /* Structural & Glassmorphism */
     --nav-height: 80px;
-    --glass-bg: rgba(251, 249, 244, 0.85); /* High opacity for readability */
+    --glass-bg: rgba(251, 249, 244, 0.85); 
     --glass-border: rgba(26, 107, 94, 0.15);
 }
 
@@ -32,16 +29,24 @@ body {
     background-color: var(--warm-sand);
     color: var(--deep-palm);
     font-family: var(--font-body);
-    font-size: 18px; /* Large base size for older demographics */
+    font-size: 18px; 
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
 }
 
-/* Focus states for accessibility */
 a:focus, button:focus, input:focus {
     outline: 3px solid var(--ocean-teal);
     outline-offset: 4px;
+}
+
+/* =========================================
+   UTILITY CLASSES 
+   ========================================= */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 /* =========================================
@@ -129,7 +134,7 @@ a:focus, button:focus, input:focus {
     color: var(--deep-palm);
     font-weight: 500;
     font-size: 1.05rem;
-    padding: 10px 15px; /* Large tap targets */
+    padding: 10px 15px; 
     border-radius: 20px;
     transition: all 0.3s ease;
 }
@@ -182,7 +187,7 @@ a:focus, button:focus, input:focus {
 }
 
 .pill-badge {
-    background: rgba(244, 208, 139, 0.3); /* Subtle sun-glow */
+    background: rgba(244, 208, 139, 0.3); 
     color: var(--ocean-teal);
     font-weight: 600;
     font-size: 0.95rem;
@@ -208,7 +213,7 @@ h1 {
 
 .hero-subtext {
     font-size: clamp(1.1rem, 2vw, 1.35rem);
-    color: #2c4a41; /* Slightly lighter than deep-palm for hierarchy */
+    color: #2c4a41; 
     max-width: 650px;
     margin-bottom: 10px;
 }
@@ -266,205 +271,6 @@ h1 {
 }
 
 /* =========================================
-   MOTION & ANIMATIONS
-   ========================================= */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(30px, 40px) scale(1.05); }
-}
-
-.animate-fade-in {
-    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-up {
-    opacity: 0;
-    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Staggered entrance delays */
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
-.delay-4 { animation-delay: 0.8s; }
-
-/* =========================================
-   RESPONSIVE DESIGN (Mobile)
-   ========================================= */
-@media (max-width: 850px) {
-    .mobile-toggle-label {
-        display: flex; /* Show hamburger */
-    }
-
-    .desktop-only {
-        display: none; /* Hide desktop CTA */
-    }
-
-    .mobile-only {
-        display: block;
-        margin-top: 15px;
-    }
-
-    .nav-links {
-        position: absolute;
-        top: calc(100% + 10px);
-        left: 0;
-        width: 100%;
-        background: var(--warm-sand);
-        flex-direction: column;
-        gap: 10px;
-        padding: 20px;
-        border-radius: 20px;
-        border: 1px solid var(--glass-border);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        
-        /* Hidden state for CSS mobile menu */
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
-    }
-
-    .nav-links a {
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 15px;
-    }
-
-    /* Checkbox hack to open menu */
-    .mobile-toggle-checkbox:checked ~ .nav-links {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    /* Transform hamburger to 'X' */
-    .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-    }
-    .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(2) {
-        opacity: 0;
-    }
-    .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-    }
-}
-
-
-/* =========================================
-   FOOTER & CONTACT ICONS
-   ========================================= */
-.site-footer {
-    background-color: rgba(251, 249, 244, 0.95); /* Matches --warm-sand with slight opacity */
-    border-top: 1px solid var(--glass-border);
-    padding: 80px 20px 40px;
-    margin-top: 60px;
-    position: relative;
-    z-index: 10;
-}
-
-.footer-container {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.footer-heading {
-    font-family: var(--font-display);
-    font-size: 2.2rem;
-    color: var(--deep-palm);
-    margin-bottom: 15px;
-    font-weight: 400;
-}
-
-.footer-subtext {
-    font-size: 1.15rem;
-    color: #2c4a41;
-    margin-bottom: 40px;
-}
-
-/* Flexbox wrapper for the contact buttons */
-.contact-pills-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 60px;
-}
-
-/* The individual contact buttons */
-.contact-pill {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--white);
-    color: var(--deep-palm);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
-    padding: 16px 28px;
-    border-radius: 40px;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 15px rgba(10, 46, 34, 0.04);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.contact-icon {
-    color: var(--ocean-teal);
-    transition: color 0.3s ease;
-}
-
-/* Hover effects */
-.contact-pill:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 25px rgba(26, 107, 94, 0.12);
-    border-color: var(--ocean-teal);
-    color: var(--ocean-teal);
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(26, 107, 94, 0.1);
-    padding-top: 30px;
-    font-size: 0.95rem;
-    color: #55776c;
-}
-
-/* =========================================
-   MOBILE RESPONSIVENESS FOR FOOTER
-   ========================================= */
-@media (max-width: 768px) {
-    .site-footer {
-        padding: 60px 20px 30px;
-    }
-    
-    .contact-pills-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .contact-pill {
-        justify-content: center;
-        padding: 18px 20px; /* Even larger tap targets vertically on mobile */
-    }
-}
-
-
-/* =========================================
-   UTILITY CLASSES (If not already defined)
-   ========================================= */
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* =========================================
    SUCCESS STORIES SECTION
    ========================================= */
 .success-section {
@@ -494,9 +300,6 @@ h1 {
     color: #2c4a41;
 }
 
-/* =========================================
-   SUCCESS CARDS & GRID
-   ========================================= */
 .success-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -527,11 +330,9 @@ h1 {
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    /* Removes the default blue outline on tap, relies on custom focus state */
     outline: none; 
 }
 
-/* Focus state for accessibility (keyboard users) */
 .image-transition-box:focus-visible {
     box-shadow: 0 0 0 4px var(--ocean-teal);
 }
@@ -555,18 +356,33 @@ h1 {
 .img-after {
     z-index: 2;
     opacity: 0;
-    transform: scale(1.05); /* Slight zoom-in effect on reveal */
+    transform: scale(1.05); 
 }
 
-/* The Magic: Crossfade on Hover or Tap (Focus) */
-.image-transition-box:hover .img-after,
-.image-transition-box:focus .img-after {
+/* Hover effect specifically restored for devices with a mouse (Desktop).
+  Mobile devices will ignore this and rely on the Javascript tap-to-lock.
+*/
+@media (hover: hover) and (pointer: fine) {
+    .image-transition-box:hover .img-after,
+    .image-transition-box:focus .img-after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .image-transition-box:hover .img-before,
+    .image-transition-box:focus .img-before {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* Lock State controlled by Javascript (Click/Tap) */
+.image-transition-box.locked-after .img-after {
     opacity: 1;
     transform: scale(1);
 }
 
-.image-transition-box:hover .img-before,
-.image-transition-box:focus .img-before {
+.image-transition-box.locked-after .img-before {
     opacity: 0;
     transform: scale(0.95);
 }
@@ -620,16 +436,87 @@ h1 {
     transition: opacity 0.4s ease;
 }
 
-/* Hide badges appropriately based on interaction */
-.image-transition-box:hover .badge-before,
-.image-transition-box:focus .badge-before,
-.image-transition-box:hover .interaction-hint,
-.image-transition-box:focus .interaction-hint {
+/* Hover interactions for badges (Desktop only) */
+@media (hover: hover) and (pointer: fine) {
+    .image-transition-box:hover .badge-before,
+    .image-transition-box:focus .badge-before,
+    .image-transition-box:hover .interaction-hint,
+    .image-transition-box:focus .interaction-hint {
+        opacity: 0;
+    }
+
+    .image-transition-box:hover .badge-after,
+    .image-transition-box:focus .badge-after {
+        opacity: 1;
+    }
+}
+
+/* Lock state hides the hint and before badge, shows after badge */
+.image-transition-box.locked-after .badge-before,
+.image-transition-box.locked-after .interaction-hint {
     opacity: 0;
 }
 
-.image-transition-box:hover .badge-after,
-.image-transition-box:focus .badge-after {
+.image-transition-box.locked-after .badge-after {
+    opacity: 1;
+}
+
+/* =========================================
+   BADGES & HINTS OVERLAYS
+   ========================================= */
+.status-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: opacity 0.6s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.badge-before {
+    background: rgba(251, 249, 244, 0.85);
+    color: var(--deep-palm);
+    z-index: 3;
+}
+
+.badge-after {
+    background: var(--ocean-teal);
+    color: var(--white);
+    z-index: 4;
+    opacity: 0;
+}
+
+.interaction-hint {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(10, 46, 34, 0.7);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.4s ease;
+}
+
+/* Lock state hides the hint and before badge, shows after badge */
+.image-transition-box.locked-after .badge-before,
+.image-transition-box.locked-after .interaction-hint {
+    opacity: 0;
+}
+
+.image-transition-box.locked-after .badge-after {
     opacity: 1;
 }
 
@@ -645,102 +532,162 @@ h1 {
     padding: 0 10px;
 }
 
-.client-quote cite {
-    display: block;
-    margin-top: 15px;
-    font-family: var(--font-body);
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1rem;
+/* =========================================
+   FOOTER & CONTACT ICONS
+   ========================================= */
+.site-footer {
+    background-color: rgba(251, 249, 244, 0.95); 
+    border-top: 1px solid var(--glass-border);
+    padding: 80px 20px 40px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-heading {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--deep-palm);
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.footer-subtext {
+    font-size: 1.15rem;
+    color: #2c4a41;
+    margin-bottom: 40px;
+}
+
+.contact-pills-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.contact-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--white);
+    color: var(--deep-palm);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 16px 28px;
+    border-radius: 40px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 15px rgba(10, 46, 34, 0.04);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.contact-icon {
+    color: var(--ocean-teal);
+    transition: color 0.3s ease;
+}
+
+.contact-pill:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(26, 107, 94, 0.12);
+    border-color: var(--ocean-teal);
     color: var(--ocean-teal);
 }
 
-.client-quote cite::before {
-    content: "— ";
+.footer-bottom {
+    border-top: 1px solid rgba(26, 107, 94, 0.1);
+    padding-top: 30px;
+    font-size: 0.95rem;
+    color: #55776c;
 }
 
 /* =========================================
-   ANIMATED SOCIAL ICONS (From User)
+   ANIMATED SOCIAL ICONS 
    ========================================= */
 .wrapper {
-  display: inline-flex;
-  list-style: none;
-  width: 100%;
-  padding-top: 10px;
-  margin-bottom: 40px;
-  font-family: var(--font-body); /* Updated to match site aesthetic */
-  justify-content: center;
+    display: inline-flex;
+    list-style: none;
+    width: 100%;
+    padding-top: 10px;
+    margin-bottom: 40px;
+    font-family: var(--font-body); 
+    justify-content: center;
 }
 
 .wrapper .icon {
-  position: relative;
-  background: var(--white);
-  border-radius: 50%;
-  margin: 10px;
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  color: var(--deep-palm); /* Default icon color before hover */
+    position: relative;
+    background: var(--white);
+    border-radius: 50%;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    color: var(--deep-palm); 
 }
 
 .wrapper .tooltip {
-  position: absolute;
-  top: 0;
-  font-size: 14px;
-  background: var(--white);
-  color: var(--white);
-  padding: 5px 12px;
-  border-radius: 8px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  font-weight: 500;
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: var(--white);
+    color: var(--white);
+    padding: 5px 12px;
+    border-radius: 8px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    font-weight: 500;
 }
 
 .wrapper .tooltip::before {
-  position: absolute;
-  content: "";
-  height: 8px;
-  width: 8px;
-  background: inherit; /* Inherits background from tooltip */
-  bottom: -3px;
-  left: 50%;
-  transform: translate(-50%) rotate(45deg);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: inherit; 
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .wrapper .icon:hover .tooltip,
 .wrapper .icon:focus .tooltip {
-  top: -45px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .wrapper .icon:hover span,
 .wrapper .icon:focus span,
 .wrapper .icon:hover .tooltip,
 .wrapper .icon:focus .tooltip {
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
 }
 
-/* Brand Colors on Hover */
 .wrapper .facebook:hover,
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before,
 .wrapper .facebook:focus,
 .wrapper .facebook:focus .tooltip,
 .wrapper .facebook:focus .tooltip::before {
-  background: #1877f2;
-  color: var(--white);
+    background: #1877f2;
+    color: var(--white);
 }
 
 .wrapper .twitter:hover,
@@ -749,8 +696,8 @@ h1 {
 .wrapper .twitter:focus,
 .wrapper .twitter:focus .tooltip,
 .wrapper .twitter:focus .tooltip::before {
-  background: #1da1f2;
-  color: var(--white);
+    background: #1da1f2;
+    color: var(--white);
 }
 
 .wrapper .instagram:hover,
@@ -759,6 +706,78 @@ h1 {
 .wrapper .instagram:focus,
 .wrapper .instagram:focus .tooltip,
 .wrapper .instagram:focus .tooltip::before {
-  background: #e4405f;
-  color: var(--white);
+    background: #e4405f;
+    color: var(--white);
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, 40px) scale(1.05); }
+}
+
+.animate-fade-in { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-up { opacity: 0; animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 850px) {
+    .mobile-toggle-label { display: flex; }
+    .desktop-only { display: none; }
+    .mobile-only { display: block; margin-top: 15px; }
+
+    .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        width: 100%;
+        background: var(--warm-sand);
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .mobile-toggle-checkbox:checked ~ .nav-links {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(2) { opacity: 0; }
+    .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+}
+
+@media (max-width: 768px) {
+    .site-footer { padding: 60px 20px 30px; }
+    .contact-pills-wrapper { flex-direction: column; align-items: stretch; }
+    .contact-pill { justify-content: center; padding: 18px 20px; }
 }
