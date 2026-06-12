@@ -271,7 +271,7 @@ h1 {
 }
 
 /* =========================================
-   SUCCESS STORIES SECTION
+   SUCCESS STORIES SECTION & CAROUSEL
    ========================================= */
 .success-section {
     padding: 100px 0;
@@ -300,13 +300,31 @@ h1 {
     color: #2c4a41;
 }
 
-.success-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 40px;
+/* Horizontal Slider Wrapper */
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 10px 0 30px 0; /* Padding for box-shadows and scrollbar */
+    scrollbar-width: none; /* Hides scrollbar in Firefox */
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none; /* Hides scrollbar in Chrome/Safari */
 }
 
 .success-card {
+    /* Mobile defaults to 1 card per view */
+    flex: 0 0 calc(100% - 10px); 
+    scroll-snap-align: center;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
@@ -317,6 +335,151 @@ h1 {
     gap: 24px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+}
+
+@media (min-width: 768px) {
+    .success-card {
+        /* Desktop shows 2 cards per view */
+        flex: 0 0 calc(50% - 15px); 
+    }
+}
+
+/* Slider Navigation Buttons */
+.carousel-btn {
+    background: var(--ocean-teal);
+    color: var(--white);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    z-index: 10;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--deep-palm);
+    transform: scale(1.05);
+}
+
+.prev-btn { left: -25px; }
+.next-btn { right: -25px; }
+
+@media (max-width: 850px) {
+    .prev-btn { left: -10px; }
+    .next-btn { right: -10px; }
+}
+
+/* =========================================
+   IMAGE TRANSITION INTERACTION (Click Toggle)
+   ========================================= */
+.image-transition-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4; 
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    outline: none; 
+}
+
+.image-transition-box:focus-visible {
+    box-shadow: 0 0 0 4px var(--ocean-teal);
+}
+
+.image-transition-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-before {
+    z-index: 1;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.img-after {
+    z-index: 2;
+    opacity: 0;
+    transform: scale(1.05); 
+}
+
+/* Toggle State controlled by Javascript */
+.image-transition-box.show-after .img-after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.image-transition-box.show-after .img-before {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+/* Badges & Overlays */
+.status-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.badge-before {
+    background: rgba(251, 249, 244, 0.85);
+    color: var(--deep-palm);
+    z-index: 3;
+}
+
+.badge-after {
+    background: var(--ocean-teal);
+    color: var(--white);
+    z-index: 4;
+    opacity: 0;
+}
+
+.interaction-hint {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(10, 46, 34, 0.8);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* State changes for badges when toggled */
+.image-transition-box.show-after .badge-before {
+    opacity: 0;
+}
+
+.image-transition-box.show-after .badge-after {
+    opacity: 1;
 }
 
 /* =========================================
