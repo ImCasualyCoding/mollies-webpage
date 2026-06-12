@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Testimonials | Active Horizons</title>
     
+    <!-- BRAND FONTS: Playfair Display (Elegant Serif) & Outfit (Crisp Sans-Serif) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     
     <style>
         /* =========================================
-           APPLE-INSPIRED THEME VARIABLES
+           TROPICAL HIGH-CONTRAST VARIABLES (MATCHING INDEX.HTML)
            ========================================= */
         :root {
-            --bg-color: #fbfbfd;
-            --surface-color: #ffffff;
-            --text-primary: #1d1d1f;
-            --text-secondary: #86868b;
-            --brand-color: #007d6a;
-            --brand-hover: #006050;
-            --nav-bg: rgba(251, 251, 253, 0.75);
-            --nav-border: rgba(0, 0, 0, 0.05);
+            --bg-color: #f8f6f0;       /* Warm Sand */
+            --surface-color: #ffffff;  /* Pure White */
+            --text-primary: #083d35;   /* Deep Palm (Darkest Green for Text) */
+            --text-secondary: #3a5a52; /* Ocean Sage for subordinate/secondary text */
+            --brand-color: #125b50;    /* Ocean Teal (Vibrant Brand Green) */
+            --brand-hover: #0d453c;    /* Ocean Hover */
+            --sun-accent: #e5b05c;     /* Tropical Gold/Yellow highlight */
+            --nav-bg: rgba(248, 246, 240, 0.85); /* Transparent Warm Sand */
+            --nav-border: rgba(18, 91, 80, 0.1);
             --glass-blur: saturate(180%) blur(24px);
-            --font-main: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-main: 'Outfit', sans-serif;
         }
 
         /* =========================================
@@ -34,77 +38,101 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: var(--font-main);
-            font-size: 17px; line-height: 1.47059; font-weight: 400; letter-spacing: -0.022em;
+            font-size: 18px; line-height: 1.6; font-weight: 400;
             -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
         }
         a { text-decoration: none; color: inherit; }
-        a:focus-visible, button:focus-visible { outline: 3px solid rgba(0, 125, 106, 0.5); outline-offset: 2px; }
-        .container { width: 87.5%; max-width: 980px; margin: 0 auto; }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--sun-accent); outline-offset: 2px; }
+        .container { width: 87.5%; max-width: 1050px; margin: 0 auto; }
 
         /* =========================================
-           PREMIUM GLASS NAVIGATION
+           HIGH-POP NAVIGATION BAR (MATCHING INDEX.HTML)
            ========================================= */
-        .glass-nav-container {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background: var(--nav-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-            border-bottom: 1px solid var(--nav-border);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.02);
-            z-index: 1000; height: 60px;
-            display: flex; align-items: center; transition: all 0.3s ease;
+        .nav-container {
+            position: fixed; top: 20px; left: 0; width: 100%;
+            display: flex; justify-content: center; z-index: 1000; padding: 0 20px;
         }
-        .glass-nav {
-            width: 100%; max-width: 1024px; margin: 0 auto; padding: 0 22px;
+        .nav-pill {
+            width: 100%; max-width: 1050px;
+            background: var(--surface-color);
+            /* Strong shadow to make it pop off the page */
+            box-shadow: 0 12px 35px rgba(18, 91, 80, 0.15);
+            border-radius: 980px;
+            padding: 12px 24px 12px 32px;
             display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid var(--nav-border);
         }
+        
         .logo { 
-            font-size: 20px; font-weight: 600; letter-spacing: -0.015em; color: var(--text-primary); 
-            display: flex; align-items: center; gap: 8px; transition: opacity 0.3s ease;
+            font-family: var(--font-display); font-size: 24px; font-weight: 700; 
+            color: var(--text-primary); display: flex; align-items: center; gap: 8px;
+            transition: opacity 0.3s ease;
         }
         .logo:hover { opacity: 0.7; }
+        /* Making the first word pop with the brand color */
+        .logo span { color: var(--brand-color); font-style: italic; }
         
-        .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
+        .nav-links { list-style: none; display: flex; gap: 30px; align-items: center; }
         .nav-links a { 
-            font-size: 14px; font-weight: 500; color: var(--text-primary); opacity: 0.8; 
-            transition: all 0.25s ease; letter-spacing: -0.01em; padding: 8px 16px; border-radius: 980px;
+            font-family: var(--font-body); font-size: 14px; font-weight: 600; 
+            color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px;
+            position: relative; padding: 5px 0; transition: color 0.3s ease;
         }
-        .nav-links a:hover { opacity: 1; background-color: rgba(0, 0, 0, 0.05); }
+        
+        /* Gold underline hover effect for links */
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 3px;
+            bottom: -2px; left: 0; background-color: var(--sun-accent);
+            transition: width 0.3s ease; border-radius: 2px;
+        }
+        .nav-links a:hover { color: var(--brand-color); }
+        .nav-links a:hover::after { width: 100%; }
 
         /* Buttons & Mobile Menu */
         .mobile-only { display: none; }
         .mobile-toggle-checkbox { display: none; }
-        .mobile-toggle-label { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 10px 0; z-index: 1001; }
-        .mobile-toggle-label span { display: block; width: 20px; height: 1.5px; background-color: var(--text-primary); transition: 0.3s ease; }
+        .mobile-toggle-label { display: none; flex-direction: column; cursor: pointer; gap: 6px; padding: 10px 0; z-index: 1001; }
+        .mobile-toggle-label span { display: block; width: 24px; height: 2px; background-color: var(--text-primary); transition: 0.3s ease; }
         
-        .btn-primary, .btn-primary-small, .btn-secondary {
-            display: inline-block; background-color: var(--brand-color); color: #fff !important;
-            border-radius: 980px; font-weight: 500; text-align: center; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); border: 1px solid transparent;
+        .btn-primary {
+            display: inline-block; background-color: var(--brand-color); color: var(--surface-color) !important;
+            border-radius: 980px; font-weight: 600; text-align: center; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); border: 2px solid var(--brand-color);
+            padding: 16px 36px; font-size: 15px; box-shadow: 0 8px 20px rgba(18, 91, 80, 0.25);
         }
-        .btn-primary-small { padding: 8px 18px; font-size: 13px; margin-left: 8px;}
-        .btn-primary-small:hover { background-color: var(--brand-hover); transform: scale(1.02); }
+        .btn-primary-small {
+            display: inline-block; background-color: var(--brand-color); color: var(--surface-color) !important;
+            border-radius: 980px; font-weight: 600; text-align: center; text-transform: uppercase; letter-spacing: 1px;
+            padding: 12px 24px; font-size: 13px; transition: all 0.3s ease; border: 2px solid var(--brand-color);
+        }
+        .btn-primary:hover, .btn-primary-small:hover { 
+            background-color: var(--text-primary); border-color: var(--text-primary); 
+            transform: translateY(-2px); box-shadow: 0 12px 25px rgba(8, 61, 53, 0.3);
+        }
 
         /* =========================================
            TESTIMONIALS PREMIUM HERO
            ========================================= */
         .testimonial-hero {
             position: relative;
-            padding: 180px 0 100px;
+            padding: 220px 0 100px;
             text-align: center;
             overflow: hidden;
         }
         
-        /* Floating background orbs specific to this hero */
-        .hero-glow-teal { position: absolute; top: -100px; left: -50px; width: 400px; height: 400px; background: rgba(0, 125, 106, 0.15); filter: blur(80px); border-radius: 50%; z-index: -1; }
-        .hero-glow-blue { position: absolute; bottom: -50px; right: -50px; width: 350px; height: 350px; background: rgba(0, 180, 219, 0.1); filter: blur(80px); border-radius: 50%; z-index: -1; }
+        /* Floating background orbs matching tropical theme */
+        .hero-glow-teal { position: absolute; top: -100px; left: -50px; width: 400px; height: 400px; background: rgba(18, 91, 80, 0.15); filter: blur(80px); border-radius: 50%; z-index: -1; }
+        .hero-glow-blue { position: absolute; bottom: -50px; right: -50px; width: 350px; height: 350px; background: rgba(229, 176, 92, 0.15); filter: blur(80px); border-radius: 50%; z-index: -1; }
 
         .testimonial-hero h1 {
-            font-size: clamp(48px, 8vw, 76px);
+            font-family: var(--font-display);
+            font-size: clamp(52px, 8vw, 84px);
             font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-            margin-bottom: 20px;
-            /* Premium Apple Gradient Text */
-            background: linear-gradient(135deg, var(--brand-color) 0%, #00b4db 100%);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            /* Premium Tropical Gradient Text */
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--brand-color) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
@@ -115,7 +143,7 @@
             max-width: 650px; 
             margin: 0 auto;
             letter-spacing: -0.01em;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         /* =========================================
@@ -130,79 +158,330 @@
 
         .testimonial-card {
             background-color: var(--surface-color); border-radius: 28px; padding: 48px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 2px solid transparent;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
             display: flex; flex-direction: column; height: 100%;
             position: relative; overflow: hidden;
         }
         
         /* Premium subtle quote watermark behind text */
         .testimonial-card::before {
-            content: '"'; position: absolute; top: 10px; right: 20px; font-size: 140px;
-            font-family: serif; color: var(--brand-color); opacity: 0.03; line-height: 1;
+            content: '"'; position: absolute; top: 10px; right: 28px; font-size: 140px;
+            font-family: var(--font-display); color: var(--brand-color); opacity: 0.08; line-height: 1;
         }
 
-        .testimonial-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--brand-color);
+            box-shadow: 0 20px 40px rgba(18, 91, 80, 0.12);
+        }
 
-        .testimonial-stars { color: var(--brand-color); font-size: 19px; letter-spacing: 3px; margin-bottom: 24px; }
+        .testimonial-stars { color: var(--sun-accent); font-size: 19px; letter-spacing: 3px; margin-bottom: 24px; }
         .testimonial-quote {
-            font-size: 20px; line-height: 1.5; color: var(--text-primary);
-            margin-bottom: 40px; flex-grow: 1; letter-spacing: -0.015em; font-weight: 400;
+            font-family: var(--font-body);
+            font-size: 19px; line-height: 1.6; color: var(--text-primary);
+            margin-bottom: 40px; flex-grow: 1; letter-spacing: -0.01em; font-weight: 400;
         }
-        .testimonial-author { display: flex; flex-direction: column; border-top: 1px solid #f5f5f7; padding-top: 24px; }
-        .author-name { font-weight: 600; font-size: 17px; color: var(--text-primary); letter-spacing: -0.01em; }
-        .author-detail { font-size: 15px; color: var(--text-secondary); margin-top: 4px; }
+        .testimonial-author { display: flex; flex-direction: column; border-top: 1px solid rgba(18, 91, 80, 0.1); padding-top: 24px; }
+        .author-name { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--text-primary); }
+        .author-detail { font-size: 15px; color: var(--text-secondary); margin-top: 4px; font-weight: 500; }
 
         /* =========================================
            FOOTER
            ========================================= */
-        .site-footer { background-color: var(--bg-color); padding: 100px 20px 40px; text-align: center; }
-        .footer-heading { font-size: 32px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.015em; }
-        .footer-subtext { font-size: 19px; color: var(--text-secondary); margin-bottom: 40px; }
-        .contact-pills-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 56px; }
+        .site-footer { background-color: var(--surface-color); border-top: 1px solid rgba(18,91,80,0.05); padding: 100px 20px 40px; text-align: center; }
+        .footer-heading { font-family: var(--font-display); font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); }
+        .footer-subtext { font-size: 20px; color: var(--text-secondary); margin-bottom: 48px; }
+        .contact-pills-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 60px; }
         .contact-pill {
-            display: flex; align-items: center; gap: 10px; background: var(--surface-color); color: var(--text-primary);
-            font-weight: 500; font-size: 15px; padding: 16px 28px; border-radius: 980px; box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex; align-items: center; gap: 12px; background: var(--bg-color); color: var(--text-primary);
+            font-weight: 600; font-size: 16px; padding: 18px 32px; border-radius: 980px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 2px solid transparent; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .contact-icon { color: var(--brand-color); transition: color 0.3s ease; }
-        .contact-pill:hover { border-color: rgba(0,0,0,0.1); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .contact-pill:hover { border-color: var(--brand-color); color: var(--brand-color); transform: translateY(-4px); box-shadow: 0 12px 25px rgba(18, 91, 80, 0.15);}
 
         .wrapper { display: inline-flex; list-style: none; gap: 16px; margin-bottom: 40px; }
         .wrapper .icon {
-            background: var(--surface-color); border-radius: 50%; width: 48px; height: 48px; display: flex; justify-content: center; align-items: center;
-            border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 8px rgba(0,0,0,0.02); cursor: pointer; transition: all 0.3s ease; color: var(--text-primary);
+            background: var(--bg-color); border-radius: 50%; width: 56px; height: 56px; display: flex; justify-content: center; align-items: center;
+            border: 2px solid transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.3s ease; color: var(--text-primary);
         }
-        .wrapper .icon:hover { border-color: transparent; color: #fff; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .wrapper .icon:hover { border-color: transparent; color: #fff; transform: translateY(-6px); box-shadow: 0 12px 20px rgba(0,0,0,0.15); }
         .wrapper .facebook:hover { background: #1877f2; }
         .wrapper .twitter:hover { background: #1da1f2; }
         .wrapper .instagram:hover { background: #e4405f; }
-        .footer-bottom { border-top: 1px solid #d2d2d7; padding-top: 24px; font-size: 13px; color: var(--text-secondary); }
+        .footer-bottom { border-top: 1px solid rgba(18,91,80,0.05); padding-top: 30px; font-size: 14px; color: var(--text-secondary); font-weight: 500;}
+
+        /* =========================================
+           INTERACTIVE 3D TILT SPOTLIGHT CARD
+           ========================================= */
+        .featured-spotlight-section {
+            padding: 30px 0 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-container-3d {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 380px;
+            perspective: 2000px;
+        }
+
+        .canvas-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 36px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 30px 70px rgba(18, 91, 80, 0.16);
+            background: linear-gradient(135deg, var(--brand-color) 0%, var(--brand-hover) 100%);
+            border: 2px solid rgba(229, 176, 92, 0.25);
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            overflow: hidden;
+        }
+
+        /* Overlay high-fidelity tropical mesh gradient behind text */
+        .canvas-3d::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(229, 176, 92, 0.18) 0%, transparent 60%),
+                        radial-gradient(circle at 10% 80%, rgba(24, 154, 134, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Positioning the 25 invisible triggers in a 5x5 grid */
+        .tracker {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 20; /* Sit above to catch mouse hovers */
+            cursor: pointer;
+        }
+
+        .tr-1  { grid-area: 1 / 1; }
+        .tr-2  { grid-area: 1 / 2; }
+        .tr-3  { grid-area: 1 / 3; }
+        .tr-4  { grid-area: 1 / 4; }
+        .tr-5  { grid-area: 1 / 5; }
+        .tr-6  { grid-area: 2 / 1; }
+        .tr-7  { grid-area: 2 / 2; }
+        .tr-8  { grid-area: 2 / 3; }
+        .tr-9  { grid-area: 2 / 4; }
+        .tr-10 { grid-area: 2 / 5; }
+        .tr-11 { grid-area: 3 / 1; }
+        .tr-12 { grid-area: 3 / 2; }
+        .tr-13 { grid-area: 3 / 3; }
+        .tr-14 { grid-area: 3 / 4; }
+        .tr-15 { grid-area: 3 / 5; }
+        .tr-16 { grid-area: 4 / 1; }
+        .tr-17 { grid-area: 4 / 2; }
+        .tr-18 { grid-area: 4 / 3; }
+        .tr-19 { grid-area: 4 / 4; }
+        .tr-20 { grid-area: 4 / 5; }
+        .tr-21 { grid-area: 5 / 1; }
+        .tr-22 { grid-area: 5 / 2; }
+        .tr-23 { grid-area: 5 / 3; }
+        .tr-24 { grid-area: 5 / 4; }
+        .tr-25 { grid-area: 5 / 5; }
+
+        /* Rotations triggered on the sibling canvas when hovering a cell */
+        .canvas-3d:has(.tr-1:hover)  { transform: rotateX(12deg) rotateY(-18deg); }
+        .canvas-3d:has(.tr-2:hover)  { transform: rotateX(12deg) rotateY(-9deg); }
+        .canvas-3d:has(.tr-3:hover)  { transform: rotateX(12deg) rotateY(0deg); }
+        .canvas-3d:has(.tr-4:hover)  { transform: rotateX(12deg) rotateY(9deg); }
+        .canvas-3d:has(.tr-5:hover)  { transform: rotateX(12deg) rotateY(18deg); }
+
+        .canvas-3d:has(.tr-6:hover)  { transform: rotateX(6deg) rotateY(-18deg); }
+        .canvas-3d:has(.tr-7:hover)  { transform: rotateX(6deg) rotateY(-9deg); }
+        .canvas-3d:has(.tr-8:hover)  { transform: rotateX(6deg) rotateY(0deg); }
+        .canvas-3d:has(.tr-9:hover)  { transform: rotateX(6deg) rotateY(9deg); }
+        .canvas-3d:has(.tr-10:hover) { transform: rotateX(6deg) rotateY(18deg); }
+
+        .canvas-3d:has(.tr-11:hover) { transform: rotateX(0deg) rotateY(-18deg); }
+        .canvas-3d:has(.tr-12:hover) { transform: rotateX(0deg) rotateY(-9deg); }
+        .canvas-3d:has(.tr-13:hover) { transform: rotateX(0deg) rotateY(0deg); }
+        .canvas-3d:has(.tr-14:hover) { transform: rotateX(0deg) rotateY(9deg); }
+        .canvas-3d:has(.tr-15:hover) { transform: rotateX(0deg) rotateY(18deg); }
+
+        .canvas-3d:has(.tr-16:hover) { transform: rotateX(-6deg) rotateY(-18deg); }
+        .canvas-3d:has(.tr-17:hover) { transform: rotateX(-6deg) rotateY(-9deg); }
+        .canvas-3d:has(.tr-18:hover) { transform: rotateX(-6deg) rotateY(0deg); }
+        .canvas-3d:has(.tr-19:hover) { transform: rotateX(-6deg) rotateY(9deg); }
+        .canvas-3d:has(.tr-20:hover) { transform: rotateX(-6deg) rotateY(18deg); }
+
+        .canvas-3d:has(.tr-21:hover) { transform: rotateX(-12deg) rotateY(-18deg); }
+        .canvas-3d:has(.tr-22:hover) { transform: rotateX(-12deg) rotateY(-9deg); }
+        .canvas-3d:has(.tr-23:hover) { transform: rotateX(-12deg) rotateY(0deg); }
+        .canvas-3d:has(.tr-24:hover) { transform: rotateX(-12deg) rotateY(9deg); }
+        .canvas-3d:has(.tr-25:hover) { transform: rotateX(-12deg) rotateY(18deg); }
+
+        /* Actual visual content overlaying on top */
+        .card-content-3d {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            padding: 44px 48px;
+            pointer-events: none; /* Let hovers pass through to trackers */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--surface-color);
+            transform-style: preserve-3d;
+            z-index: 5;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        /* 3D POP effect on card elements */
+        .spotlight-badge {
+            align-self: flex-start;
+            background: var(--sun-accent);
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 6px 18px;
+            border-radius: 980px;
+            transform: translateZ(45px);
+            box-shadow: 0 4px 15px rgba(229, 176, 92, 0.4);
+        }
+
+        .card-title-3d {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4.5vw, 38px);
+            font-weight: 700;
+            color: var(--surface-color);
+            transform: translateZ(65px);
+            margin-top: 15px;
+            line-height: 1.25;
+            text-shadow: 0 4px 12px rgba(8, 61, 53, 0.35);
+        }
+
+        .card-description-3d {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 1.6;
+            color: #f0ede6;
+            transform: translateZ(55px);
+            margin-top: 12px;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .card-description-3d .quote-author {
+            color: var(--sun-accent);
+            font-weight: 600;
+            font-style: normal;
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        .card-stats-row-3d {
+            display: flex;
+            gap: 40px;
+            margin-top: 24px;
+            transform: translateZ(60px);
+        }
+
+        .stat-box-3d {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number-3d {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--sun-accent);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label-3d {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(248, 246, 240, 0.75);
+            font-weight: 600;
+        }
+
+        .card-footer-3d {
+            align-self: flex-start;
+            transform: translateZ(35px);
+            font-size: 13px;
+            color: rgba(248, 246, 240, 0.6);
+            letter-spacing: 1px;
+            margin-top: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .card-container-3d {
+                height: auto;
+                min-height: 440px;
+            }
+            .canvas-3d {
+                border-radius: 28px;
+            }
+            .card-stats-row-3d {
+                flex-wrap: wrap;
+                gap: 20px;
+                margin-top: 16px;
+            }
+            .card-content-3d {
+                padding: 30px;
+            }
+            .card-title-3d {
+                font-size: 26px;
+            }
+            .card-description-3d {
+                font-size: 16px;
+            }
+        }
 
         /* Animations & Mobile */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         .animate-slide-up { opacity: 0; animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
 
         @media (max-width: 850px) {
             .mobile-toggle-label { display: flex; }
             .desktop-only { display: none; }
             .mobile-only { display: block; margin-top: 20px; }
+            .nav-pill { padding: 12px 20px; border-radius: 20px;} /* Less pill-like on mobile to fit menu */
             .nav-links {
-                position: absolute; top: 60px; left: 0; width: 100%;
-                background: rgba(255,255,255,0.95); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); 
-                flex-direction: column; gap: 0; padding: 0 22px 22px; border-bottom: 1px solid var(--nav-border);
+                position: absolute; top: 75px; left: 0; width: 100%;
+                background: var(--surface-color); border: 1px solid var(--nav-border); border-radius: 20px;
+                flex-direction: column; gap: 10px; padding: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);
                 opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease;
             }
-            .nav-links a { display: block; width: 100%; padding: 16px 0; border-radius: 0; border-bottom: 1px solid #f5f5f7; font-size: 17px; }
-            .nav-links a:hover { background-color: transparent; color: var(--brand-color); }
+            .nav-links a { display: block; width: 100%; text-align: center; padding: 15px; font-size: 16px;}
+            .nav-links a::after { display: none; } /* Hide underline on mobile */
+            .nav-links a:hover { background-color: var(--bg-color); border-radius: 8px;}
             .mobile-toggle-checkbox:checked ~ .nav-links { opacity: 1; visibility: visible; transform: translateY(0); }
-            .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+            .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(2) { opacity: 0; }
-            .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+            .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
         @media (max-width: 768px) {
+            .testimonial-hero { padding: 160px 20px 80px; }
             .contact-pills-wrapper { flex-direction: column; align-items: stretch; }
             .contact-pill { justify-content: center; }
         }
@@ -210,14 +489,10 @@
 </head>
 <body>
 
-    <header class="glass-nav-container animate-fade-in">
-        <nav class="glass-nav">
+    <header class="nav-container animate-fade-in">
+        <nav class="nav-pill">
             <a href="index.html" class="logo">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand-color);">
-                    <path d="M12 22c4-4 8-9 8-14a8 8 0 1 0-16 0c0 5 4 10 8 14z"></path>
-                    <path d="M12 22V12"></path>
-                </svg>
-                Active Horizons
+                <span>Active</span>Horizons
             </a>
 
             <input type="checkbox" id="mobile-toggle" class="mobile-toggle-checkbox" aria-label="Toggle Navigation">
@@ -250,27 +525,74 @@
                 <p class="hero-subtext animate-slide-up delay-1">Hear directly from the individuals who have regained their strength, mobility, and independence.</p>
             </div>
         </section>
+
+        <!-- PORTED HIGH-CRAFT 25-TRACKER CSS-ONLY 3D TILT SPOTLIGHT CARD -->
+        <div class="container">
+            <section class="featured-spotlight-section animate-slide-up delay-1" style="animation-delay: 0.15s;">
+                <div class="card-container-3d noselect" aria-label="Interactive 3D highlight card">
+                    <div class="canvas-3d">
+                        <!-- Grid of 25 trackers on top -->
+                        <div class="tracker tr-1"></div>
+                        <div class="tracker tr-2"></div>
+                        <div class="tracker tr-3"></div>
+                        <div class="tracker tr-4"></div>
+                        <div class="tracker tr-5"></div>
+                        <div class="tracker tr-6"></div>
+                        <div class="tracker tr-7"></div>
+                        <div class="tracker tr-8"></div>
+                        <div class="tracker tr-9"></div>
+                        <div class="tracker tr-10"></div>
+                        <div class="tracker tr-11"></div>
+                        <div class="tracker tr-12"></div>
+                        <div class="tracker tr-13"></div>
+                        <div class="tracker tr-14"></div>
+                        <div class="tracker tr-15"></div>
+                        <div class="tracker tr-16"></div>
+                        <div class="tracker tr-17"></div>
+                        <div class="tracker tr-18"></div>
+                        <div class="tracker tr-19"></div>
+                        <div class="tracker tr-20"></div>
+                        <div class="tracker tr-21"></div>
+                        <div class="tracker tr-22"></div>
+                        <div class="tracker tr-23"></div>
+                        <div class="tracker tr-24"></div>
+                        <div class="tracker tr-25"></div>
+                        
+                        <!-- Premium content visible visually inside -->
+                        <div class="card-content-3d">
+                            <span class="spotlight-badge">Words from Mollie</span>
+                            <h2 class="card-title-3d">The Active Horizons Mission</h2>
+                            <p class="card-description-3d">
+                                “I focus on gentle relaible, and professional physical therapy tailored for older adults. Brining the clinic's expertise to the comfort of your sunny South Florida Lifestle.”
+                                <span class="quote-author">– Mollie W.</span>
+                            </p>
+                            <div class="card-stats-row-3d">
+                                <div class="stat-box-3d">
+                                    <span class="stat-number-3d">6.5+</span>
+                                    <span class="stat-label-3d">Years Active</span>
+                                </div>
+                                <div class="stat-box-3d">
+                                    <span class="stat-number-3d">Hunndres</span>
+                                    <span class="stat-label-3d">Happy Clients</span>
+                                </div>
+                                <div class="stat-box-3d">
+                                    <span class="stat-number-3d">100%</span>
+                                    <span class="stat-label-3d">Mobile Care</span>
+                                </div>
+                            </div>
+                            <div class="card-footer-3d clickable">
+                                <span>Here are some statements from clients</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
         
         <div class="container">
             <div class="testimonials-grid">
                 
                 <!-- Testimonial 1 -->
-                <div class="testimonial-card animate-slide-up delay-1">
-                    <div class="testimonial-stars">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    </div>
-                    <p class="testimonial-quote">"Mollie has been my trainer for six and a half years. I started when I was 57 year olds and was post cancer survivor. I just wanted to feel better and improve my endurance. She helped me accomplish that goal rather quickly. I had two shoulders that were severely restricted in horizontal movement. Two doctors told me that there was nothing they could do for me. After a year, Mollie helped me regain FULL movement of both shoulders. I was also getting stronger as the months went by. I ahd several operations and procedures. She helped me recover from each treatment and not once did I ever injure myself while training with Mollie. She is very cautious. Since I began training, I have gained 25 pounds in muscle and I look and feel like a new person. Our goals were met and suprassed. For that I will always be greatful for her skills."</p>
-                    <div class="testimonial-author">
-                        <span class="author-name">John Challis</span>
-                        <span class="author-detail">Delray Beach, FL</span>
-                    </div>
-                </div>
-
-                <!-- Testimonial 2 -->
                 <div class="testimonial-card animate-slide-up delay-2">
                     <div class="testimonial-stars">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -279,27 +601,14 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     </div>
-                    <p class="testimonial-quote">"Hi. I have known Mollie Wittenkeller since moving to Florida. I would see her at the gym working with some of her clients and was always impressed with her friendliness and courtesy. She would always speak and offer words of encouragement.
-Later I was involved in a traffic accident and after going from
-doctor to doctor and their owned therapy facilities, I decided I would take charge of my body and asked Mollie if she would train me. In addition to the accident damage, I have arthritis and fiber mialigia and have taken medications for years with limited success.
-Mollie developed a program for me that not only provided relief from the arthritis and fiber mialigia but also assisted me with muscle tone and weight loss. She was always on time and eager to know how the day had gone and offered words of encouragement and humor to make the workouts enjoyable. Mollie is a highly trained person who knows the best techniques on how to stretch and massage the body to eliminate soreness and prevent injury.
-Because of the fine work Mollie did for me, I encouraged my husband to begin training with Mollie and likewise she did an excellent job with him in terms of weight loss and toning the body.
-I would highly recommend Mollie as a person on whom you can depend and will go the extra mile to make sure she accomplishes the job to perfection. She is a very nice young lady.
-
-
-I am pleased to provide a letter of recommendation to Mollie Wittenkeller. I have known Miss Wittenkeller for approximately 6 years and previously was a client of hers as a physical fitness trainer.
-During the course of that time, I trained with Mollie for several years.
-She possesses a phenomenal work ethic and pays special attention to detail.
-She is courteous, friendly and most attentive to the customer needs. She constantly tries to please and is free with advice on how best to maximize a procedure or to improve the efficiency of steps toward meeting goals. She is punctual and gives of herself above and beyond the call of duty.
-Since I gave up training due to personal reasons, I have remained in contact with Mollie and value her as a friend. She is extremely intelligent and witty and would make a great addition to any team. I gladly offer the highest recommendation for favorable consideration of her as a member of your team and would welcome the opportunity to answer any questions that you might have about Mollie.
-"</p>
+                    <p class="testimonial-quote">"Mollie has been my physical trainer for six and a half years, helping me quickly rebuild my endurance as a cancer survivor. She even helped me recover FULL range of movement in both shoulders after multiple doctors said nothing could be done! Her cautious, professional approach keeps me safe and injury-free. I’ve gained 25 pounds of solid muscle and feel like a completely new person."</p>
                     <div class="testimonial-author">
-                        <span class="author-name">Cathy Bolinger</span>
-                        <span class="author-detail">N/A</span>
+                        <span class="author-name">John C.</span>
+                        <span class="author-detail">Delray Beach, FL</span>
                     </div>
                 </div>
 
-                <!-- Testimonial 3 -->
+                <!-- Testimonial 2 -->
                 <div class="testimonial-card animate-slide-up delay-3">
                     <div class="testimonial-stars">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -308,12 +617,25 @@ Since I gave up training due to personal reasons, I have remained in contact wit
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     </div>
-                    <p class="testimonial-quote">"My name is Benjamin Preston 26year paramedic, lieutenant firefighter for the City of Deerfield. Additionally, for over 20 years I have been bless with a successful business. Preston Student Athlete Services, Inc... I have a Master's degree in exercise physiology. I take great pleasure in
-recommending Mollie Wittenkeller. She is an outstanding young lady. She is a great trainer, and even a better person. She will raise the level of those around her and at the same time remain focus on her assignments. Her
-moral character is worthy of praise. Please extend to her any opportunities that may be available in your organization. If you need to contact me please do so. I can be reached at 954-421-0588. Thank you for your time.
-"</p>
+                    <p class="testimonial-quote">"After a traffic accident, I turned to Mollie. Suffering from arthritis and fibromyalgia, her customized rehab program provided relief that years of medication couldn’t. Beyond physical results, Mollie supports me with phenomenal courtesy, motivation, and an amazing work ethic. I even encouraged my husband to train with her, and she has done an equally wonderful job with him!"</p>
                     <div class="testimonial-author">
-                        <span class="author-name">Benjamin Preston</span>
+                        <span class="author-name">Cathy B.</span>
+                        <span class="author-detail">Palm Beach, FL</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card animate-slide-up delay-4">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-quote">"As a 26-year veteran paramedic, lieutenant firefighter, and exercise physiologist, I can confidently say Mollie is an outstanding practitioner. She possesses premium training expertise, a stellar moral character, and a heart for service that elevates her clients' lives. She has my deep respect and highest possible recommendation."</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">Benjamin P.</span>
                         <span class="author-detail">Boynton Beach, FL</span>
                     </div>
                 </div>
@@ -327,18 +649,10 @@ moral character is worthy of praise. Please extend to her any opportunities that
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     </div>
-                    <p class="testimonial-quote">"I have known Mollie for six years. She is one of the most loyal and dedicated people I have ever known. She is dedicated to her craft and loves what she does.
-I have been training NFL players, college athletes, and high school athletes for ten years now and Mollies' knowledge is remarkable. She is awesome with weight room and on field training. She is a real people person and a great person to be around.
-To have her on your staff will be nothing short of an upgrade.
-Personal Trainer
-Noted clients:
-Chris Chambers (KC Cheifs)
-Lee Evans (Buffalo Bills)
-Jamar Fletcher (Houston Texans)
-"</p>
+                    <p class="testimonial-quote">"Having trained NFL players and college athletes for over ten years, I can state that Mollie’s physical rehabilitation and strength coaching knowledge is truly remarkable. She loves her craft, is exceptionally loyal, and connects deeply with people. She is a massive asset to anyone's recovery."</p>
                     <div class="testimonial-author">
-                        <span class="author-name">Coach Conroy Whyte</span>
-                        <span class="author-detail">Zion Lutheran Christian School</span>
+                        <span class="author-name">Coach Conroy W.</span>
+                        <span class="author-detail">Zion Lutheran School</span>
                     </div>
                 </div>
 
