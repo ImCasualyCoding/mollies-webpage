@@ -261,216 +261,78 @@
         
         .certificates-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 36px;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 24px;
         }
-        @media(max-width: 820px) {
+        @media(max-width: 600px) {
             .certificates-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 20px;
             }
         }
 
-        /* Perfected High-Fidelity Certificate Card Design
-           Inspired by premium Uiverse components - multi-layered glass-card with certificate preview frames */
+        /* Clean & Elegant Certificate Card Design */
         .cert-card {
             background: var(--surface-color);
-            border-radius: 28px;
-            box-shadow: 0 15px 45px rgba(18, 91, 80, 0.06);
-            border: 2px solid rgba(18, 91, 80, 0.04);
-            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(18, 91, 80, 0.03);
+            border: 1px solid rgba(18, 91, 80, 0.08);
+            padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 12px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .cert-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-4px);
             border-color: var(--brand-color);
-            box-shadow: 0 24px 60px rgba(18, 91, 80, 0.12);
+            box-shadow: 0 12px 30px rgba(18, 91, 80, 0.08);
         }
 
-        /* Certificate Visual Placeholder frame (Mollie can drop her certificate JPGs in here later as requested) */
         .cert-visual-zone {
             position: relative;
             width: 100%;
             aspect-ratio: 1.414 / 1; /* Standard landscape certificate ratio */
-            background: linear-gradient(135deg, #f5f3eb 0%, #edeae0 100%);
-            border-radius: 16px;
-            border: 2px dashed rgba(18, 91, 80, 0.15);
+            background: #fafaf7;
+            border-radius: 10px;
+            border: 1px solid rgba(18, 91, 80, 0.06);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            text-align: center;
             overflow: hidden;
-            transition: border-color 0.3s ease, background 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .cert-card:hover .cert-visual-zone {
-            border-color: rgba(229, 176, 92, 0.5);
-            background: linear-gradient(135deg, #fffcf5 0%, #fcf9f0 100%);
+            background: #ffffff;
         }
 
-        /* Premium Golden Badge / Seal overlay */
-        .cert-seal {
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, #fbd278 0%, #e5b05c 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 15px rgba(229, 176, 92, 0.35);
-            color: var(--text-primary);
-            position: relative;
-            margin-bottom: 12px;
-            border: 2px solid #ffffff;
+        .cert-visual-zone img, .cert-visual-zone canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
         }
 
-        /* Seal ribbon tails */
-        .cert-seal::before, .cert-seal::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            width: 14px;
-            height: 25px;
-            background: #e5b05c;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
-            z-index: -1;
-        }
-        .cert-seal::before { left: 10px; transform: rotate(-10deg); }
-        .cert-seal::after { right: 10px; transform: rotate(10deg); }
-
-        .cert-preview-title {
-            font-family: var(--font-display);
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .cert-preview-org {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--brand-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .cert-upload-hint {
-            font-size: 12px;
-            color: var(--text-secondary);
-            background: rgba(18, 91, 80, 0.05);
-            padding: 6px 16px;
-            border-radius: 980px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            border: 1px solid rgba(18,91,80,0.05);
-        }
-
-        /* Interactive light sweep effect on hoveringcard */
-        .sweep-overlay {
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: skewX(-30deg);
-            transition: none;
-            pointer-events: none;
-        }
-        .cert-card:hover .sweep-overlay {
-            left: 200%;
-            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Card Content Text Group */
-        .cert-details {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            text-align: left;
-        }
-
-        .cert-badge-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cert-status-badge {
-            background: rgba(18, 91, 80, 0.08);
-            border: 1px solid rgba(18, 91, 80, 0.12);
-            color: var(--brand-color);
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 980px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .cert-status-badge span {
-            width: 6px; height: 6px;
-            background: #22c55e;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .cert-auth-id {
-            font-size: 11px;
-            font-family: monospace;
-            color: var(--text-secondary);
-            letter-spacing: 0.5px;
-        }
-
-        .cert-title {
-            font-family: var(--font-display);
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.3;
-        }
-
-        .cert-desc {
+        .cert-card-title {
+            font-family: var(--font-body);
             font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-
-        .cert-institution-footer {
-            border-top: 1px solid rgba(18, 91, 80, 0.06);
-            padding-top: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-
-        .cert-inst-tag {
-            font-size: 13px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .cert-issue-date {
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-weight: 500;
+            text-align: center;
+            line-height: 1.4;
+            margin: 4px 6px;
+            word-wrap: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 42px;
         }
 
         /* Modal for Certificate Previewing */
@@ -1128,217 +990,19 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE HIGH-CRAFT EXCELLENCE GRID & PORTFOLIO BUILDER -->
+        <!-- DYNAMIC AND VERIFIED CERTIFICATION SHOWCASE -->
         <section class="certificates-section">
-            <div class="container animate-slide-up delay-1 text-center">
+            <div class="container animate-slide-up delay-1">
                 
-                <div class="certificates-header">
-                    <h2>Mollie’s Professional Portfolio</h2>
-                    <p style="max-width: 680px; margin: 0 auto 30px;">
-                        Explore our clinical board certifications as verified standards, or upload custom portfolio documents to dynamically preview credentials page-by-page.
+                <div class="certificates-header text-center" style="margin-bottom: 50px;">
+                    <h2>Professional Certifications</h2>
+                    <p style="max-width: 680px; margin: 15px auto 0; font-size: 18px; color: var(--text-secondary);">
+                        Mollie’s official professional credentials loaded directly from her digital portfolio. Select any card to inspect the document scan.
                     </p>
                 </div>
 
-                <!-- PORTFOLIO NAVIGATION SELECTOR -->
-                <div class="portfolio-source-toggle-wrapper">
-                    <div class="portfolio-source-toggle">
-                        <button class="portfolio-toggle-btn active" id="btn-toggle-default">Verified Standards</button>
-                        <button class="portfolio-toggle-btn" id="btn-toggle-custom">Interactive PDF Portfolio</button>
-                    </div>
-                </div>
-
-                <!-- SUBSECTION 1: DEFAULT EXCELLENCE GRID (VERIFIED STANDARDS) -->
-                <div id="portfolio-default-section" class="certificates-grid">
-                    
-                    <!-- Certification Item 1 -->
-                    <div class="cert-card clickable-cert" data-title="Advanced Rehabilitation & Joint Mobility Restorer" data-org="Florida Wellness and Clinical Rehab Coalition" data-desc="Comprehensive training in therapeutic exercises, elderly skeletal kinematics, post-cancer physical rehabilitation, and joint articulation. Specifically qualified to recover restricted ranges of motion without pain or over-strain.">
-                        <div class="sweep-overlay"></div>
-                        <div class="cert-visual-zone bg-cert-placeholder">
-                            <div class="cert-seal">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="contact-icon" style="color: #083d35;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            </div>
-                            <div class="cert-preview-title">Clinical Rehabilitation</div>
-                            <div class="cert-preview-org">Wellness Rehab Coalition</div>
-                            <div class="cert-upload-hint">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                                <span>Image Placeholder</span>
-                            </div>
-                        </div>
-                        <div class="cert-details">
-                            <div class="cert-badge-row">
-                                <span class="cert-status-badge"><span></span>Active & Verified</span>
-                                <span class="cert-auth-id">ID: #AH-REHAB-2016</span>
-                            </div>
-                            <h3 class="cert-title">Certified Advanced Physical Rehabilitation Specialist</h3>
-                            <p class="cert-desc">Tailored focus on elderly skeletal kinematics, post-operative support, survivor rehabilitation, and muscle rebuilding techniques.</p>
-                        </div>
-                        <div class="cert-institution-footer">
-                            <span class="cert-inst-tag">Clinical Wellness Coalition</span>
-                            <span class="cert-issue-date">Board Registered</span>
-                        </div>
-                    </div>
-
-                    <!-- Certification Item 2 -->
-                    <div class="cert-card clickable-cert" data-title="Certified Posture Specialist (CPS)" data-org="National Posture Institute (NPI)" data-desc="Accredited qualification centering on corrective posture alignment, muscle balance diagnostics, spine decompressing routines, and biomechanical assessment to eradicate neck, shoulder, and spinal fatigue.">
-                        <div class="sweep-overlay"></div>
-                        <div class="cert-visual-zone bg-cert-placeholder">
-                            <div class="cert-seal">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="contact-icon" style="color: #083d35;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            </div>
-                            <div class="cert-preview-title">Certified Posture</div>
-                            <div class="cert-preview-org">National Posture Institute</div>
-                            <div class="cert-upload-hint">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                                <span>Image Placeholder</span>
-                            </div>
-                        </div>
-                        <div class="cert-details">
-                            <div class="cert-badge-row">
-                                <span class="cert-status-badge"><span></span>Active & Verified</span>
-                                <span class="cert-auth-id">ID: #NPI-CPS-4927</span>
-                            </div>
-                            <h3 class="cert-title">Certified Posture Specialist (CPS)</h3>
-                            <p class="cert-desc">Specialized in assessing posture patterns, structural imbalances, spinal ergonomics, and compiling clinical movement modifications.</p>
-                        </div>
-                        <div class="cert-institution-footer">
-                            <span class="cert-inst-tag">National Posture Institute</span>
-                            <span class="cert-issue-date">Accredited Board</span>
-                        </div>
-                    </div>
-
-                    <!-- Certification Item 3 -->
-                    <div class="cert-card clickable-cert" data-title="Certified Personal Trainer (CPT) - Senior Fitness" data-org="National Academy of Sports Medicine (NASM)" data-desc="The gold standard in athletic conditioning and personal fitness training. Focuses extensively on cardiovascular strength, bone density improvement, flexibility preservation, joint protection, and healthy body sculpting.">
-                        <div class="sweep-overlay"></div>
-                        <div class="cert-visual-zone bg-cert-placeholder">
-                            <div class="cert-seal">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="contact-icon" style="color: #083d35;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            </div>
-                            <div class="cert-preview-title">NASM Senior Fitness</div>
-                            <div class="cert-preview-org">Academy of Sports Medicine</div>
-                            <div class="cert-upload-hint">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                                <span>Image Placeholder</span>
-                            </div>
-                        </div>
-                        <div class="cert-details">
-                            <div class="cert-badge-row">
-                                <span class="cert-status-badge"><span></span>Active & Verified</span>
-                                <span class="cert-auth-id">ID: #NASM-SFS-8273</span>
-                            </div>
-                            <h3 class="cert-title">Certified Personal & Senior Fitness Specialist</h3>
-                            <p class="cert-desc">The industry premier credential for compiling low-impact muscle development, strength building, and balanced aerobic flows.</p>
-                        </div>
-                        <div class="cert-institution-footer">
-                            <span class="cert-inst-tag">NASM Academics</span>
-                            <span class="cert-issue-date">National Standard</span>
-                        </div>
-                    </div>
-
-                    <!-- Certification Item 4 -->
-                    <div class="cert-card clickable-cert" data-title="Functional Movement Screen & Alignment Specialist (FMS Level 1)" data-org="Functional Movement Systems" data-desc="Comprehensive training in movement assessment protocols. Specialized in physical alignment testing and developing localized biomechanical plans that prevent long-term wear, pain, or repetitive movement stress.">
-                        <div class="sweep-overlay"></div>
-                        <div class="cert-visual-zone bg-cert-placeholder">
-                            <div class="cert-seal">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="contact-icon" style="color: #083d35;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            </div>
-                            <div class="cert-preview-title">FMS Screen Board</div>
-                            <div class="cert-preview-org">Functional Movement Systems</div>
-                            <div class="cert-upload-hint">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                                <span>Image Placeholder</span>
-                            </div>
-                        </div>
-                        <div class="cert-details">
-                            <div class="cert-badge-row">
-                                <span class="cert-status-badge"><span></span>Active & Verified</span>
-                                <span class="cert-auth-id">ID: #FMS-IP-99321</span>
-                            </div>
-                            <h3 class="cert-title">Functional Movement Specialist (FMS Level 1)</h3>
-                            <p class="cert-desc">Focused on systemic mobility screening, athletic alignment testing, and constructing specialized injury-prevention protocols.</p>
-                        </div>
-                        <div class="cert-institution-footer">
-                            <span class="cert-inst-tag">Functional Movement Board</span>
-                            <span class="cert-issue-date">Accredited Board</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- SUBSECTION 2: CUSTOM INTERACTIVE PDF PORTFOLIO SECTION -->
-                <div id="portfolio-custom-section" class="hidden-sections text-left animate-slide-up">
-                    <div class="pdf-dashboard">
-                        <div class="pdf-dashboard-title">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand-color);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                            <span>Credentials PDF Portfolio Builder</span>
-                        </div>
-                        <p class="pdf-dashboard-subtitle">
-                            Restructured Credibility Panel: Mollie, you can import two different PDF credential files (e.g., State Licensures vs. Advanced Continuing Certifications). Our system will dynamically render every page of each document into its own distinct section block for seamless page-by-page client reviews and interactive clicks.
-                        </p>
-                        
-                        <div class="pdf-upload-row">
-                            <!-- PDF File 1 Upload Area -->
-                            <div class="pdf-upload-box" id="pdf1-dropzone">
-                                <input type="file" id="pdf1-file-input" accept="application/pdf">
-                                <div class="pdf-box-icon">
-                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                                </div>
-                                <div class="pdf-box-title">Clinical Licensure (PDF File 1)</div>
-                                <p class="pdf-box-desc">Drag & drop or click to upload your Florida Board credentials, clinical registry, or primary medical degrees.</p>
-                                <div id="pdf1-status-badge" class="pdf-file-badge" style="display: none;">
-                                    <span id="pdf1-status-text">No file loaded</span>
-                                    <button id="pdf1-remove-btn" title="Remove Document">&times;</button>
-                                </div>
-                            </div>
-
-                            <!-- PDF File 2 Upload Area -->
-                            <div class="pdf-upload-box" id="pdf2-dropzone">
-                                <input type="file" id="pdf2-file-input" accept="application/pdf">
-                                <div class="pdf-box-icon">
-                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                                </div>
-                                <div class="pdf-box-title">Specialty Certifications (PDF File 2)</div>
-                                <p class="pdf-box-desc">Drag & drop or click to upload your advanced specialties (NASM CPT, FMS Alignment, posture assessments, etc.) as page blocks.</p>
-                                <div id="pdf2-status-badge" class="pdf-file-badge" style="display: none;">
-                                    <span id="pdf2-status-text">No file loaded</span>
-                                    <button id="pdf2-remove-btn" title="Remove Document">&times;</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PDF Dynamic Rendering Target Zones -->
-                    <div class="pdf-loaded-container">
-                        
-                        <!-- Track A: Clinical & State Board Licensure Section pages -->
-                        <div id="pdf1-loaded-wrapper" class="pdf-section-wrapper" style="display: none;">
-                            <div class="pdf-section-header">
-                                <div class="pdf-section-header-title">Clinical Care & State Licensure Registry</div>
-                                <div class="pdf-section-header-count" id="pdf1-page-count">0 Pages</div>
-                            </div>
-                            <div class="certificates-grid" id="pdf1-pages-grid">
-                                <!-- Dynamic JS injection of page-cards here -->
-                            </div>
-                        </div>
-
-                        <!-- Track B: Specialized Practice Credentials Section pages -->
-                        <div id="pdf2-loaded-wrapper" class="pdf-section-wrapper" style="display: none;">
-                            <div class="pdf-section-header">
-                                <div class="pdf-section-header-title">Specialized Athletic & Biomechanical Accreditations</div>
-                                <div class="pdf-section-header-count" id="pdf2-page-count">0 Pages</div>
-                            </div>
-                            <div class="certificates-grid" id="pdf2-pages-grid">
-                                <!-- Dynamic JS injection of page-cards here -->
-                            </div>
-                        </div>
-
-                        <!-- Empty Interactive State -->
-                        <div id="pdf-empty-state" style="text-align: center; padding: 40px; background: rgba(18, 91, 80, 0.02); border-radius: 20px; border: 1px dashed rgba(18, 91, 80, 0.1);">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-secondary); margin-bottom: 12px; opacity: 0.7;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-                            <h4 style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Your Portfolio is Ready for Upload</h4>
-                            <p style="font-size: 14px; color: var(--text-secondary); max-width: 420px; margin: 0 auto;">Select or drop your PDF files in the uploader panels above to see their pages rendered dynamically into accredited credential categories!</p>
-                        </div>
-
-                    </div>
+                <div class="certificates-grid" id="unified-certs-grid">
+                    <!-- Dynamic JS will render simple and elegant cards for each file here -->
                 </div>
 
             </div>
@@ -1437,24 +1101,33 @@
 
     <!-- INTERACTIVE VERIFICATION DETAIL MODAL -->
     <div id="cert-modal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="max-width: 660px; padding: 30px;">
             <button id="modal-close" class="modal-close-btn" aria-label="Close window">&times;</button>
-            <span class="pill-badge" style="background-color: var(--sun-accent); color: var(--text-primary); margin-bottom: 12px; font-size: 11px;">Official Board Credential</span>
-            <h3 id="m-title" class="modal-title">Certificate Title</h3>
-            <div id="m-org" class="modal-org">Issuing Institution</div>
-            <p id="m-desc" style="font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;">Complete description of what clinical standards and athletic assessment benchmarks Mollie has proven during accreditation exams.</p>
+            <span class="pill-badge" style="background-color: var(--sun-accent); color: var(--text-primary); margin-bottom: 12px; font-size: 10px; font-weight: 700; box-shadow: none;">Verified Board Credential</span>
+            <h3 id="m-title" class="modal-title" style="font-size: 20px; line-height: 1.35; margin-bottom: 4px;">Certificate Title</h3>
+            <div id="m-org" class="modal-org" style="font-size: 11px; margin-bottom: 16px; color: var(--brand-color); font-weight: 700; text-transform: uppercase;">Official Document Scan</div>
             
-            <div class="modal-display-frame">
-                <div class="cert-seal" style="transform: scale(1.1); margin-bottom: 16px;">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="contact-icon" style="color: #083d35;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <div class="modal-display-frame" style="aspect-ratio: auto; min-height: 380px; padding: 10px; background: #ffffff; border: 1px solid rgba(18, 91, 80, 0.08); border-radius: 12px; display: block; text-align: center; color: var(--text-secondary);">
+                <!-- Full-resolution Document Canvas -->
+                <div id="modal-canvas-wrapper" style="width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; min-height: 360px;">
+                    <!-- Canvas renders here -->
                 </div>
-                <p style="font-weight: 700; margin-bottom: 4px; color: var(--text-primary);">Interactive Certificate Render Layer</p>
-                <p style="font-size: 13px; max-width: 320px;">Physical scan/document download will be added here once provided by Mollie.</p>
+            </div>
+
+            <!-- Modal Dynamic Interactivity Controls -->
+            <div id="modal-controls-row" style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <!-- Left: Pagination -->
+                <div id="modal-pagination" style="display: flex; align-items: center; gap: 8px;">
+                    <!-- Prev / Next buttons will render here if needed -->
+                </div>
+                <!-- Right: Download Link -->
+                <div id="modal-download-container">
+                    <!-- Download button renders here -->
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MAIN INTERACTION SCRIPT -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // General Modal Elements
@@ -1462,67 +1135,9 @@
             const modalClose = document.getElementById("modal-close");
             const mTitle = document.getElementById("m-title");
             const mOrg = document.getElementById("m-org");
-            const mDesc = document.getElementById("m-desc");
             const modalDisplayFrame = document.querySelector(".modal-display-frame");
 
-            // Subsections and Navigation Selector
-            const btnToggleDefault = document.getElementById("btn-toggle-default");
-            const btnToggleCustom = document.getElementById("btn-toggle-custom");
-            const defaultSection = document.getElementById("portfolio-default-section");
-            const customSection = document.getElementById("portfolio-custom-section");
-
-            // PDF Loading states
-            let pdfDocs = { pdf1: null, pdf2: null };
-            let pdfNames = { pdf1: "", pdf2: "" };
-
-            // 1. Portfolio Source Tab Switch Trigger
-            btnToggleDefault.addEventListener("click", () => {
-                btnToggleDefault.classList.add("active");
-                btnToggleCustom.classList.remove("active");
-                defaultSection.classList.remove("hidden-sections");
-                customSection.classList.add("hidden-sections");
-            });
-
-            btnToggleCustom.addEventListener("click", () => {
-                btnToggleCustom.classList.add("active");
-                btnToggleDefault.classList.remove("active");
-                customSection.classList.remove("hidden-sections");
-                defaultSection.classList.add("hidden-sections");
-            });
-
-            // 2. Setup standard static board card modals
-            function bindCardClickHandlers() {
-                const certCards = document.querySelectorAll("#portfolio-default-section .clickable-cert");
-                certCards.forEach(card => {
-                    // avoid duplicate binding
-                    card.removeAttribute("data-bound");
-                    card.style.cursor = "pointer";
-                    card.addEventListener("click", () => {
-                        const title = card.getAttribute("data-title");
-                        const org = card.getAttribute("data-org");
-                        const desc = card.getAttribute("data-desc");
-
-                        mTitle.textContent = title;
-                        mOrg.textContent = org;
-                        mDesc.textContent = desc;
-
-                        // Restore default placeholder preview
-                        modalDisplayFrame.innerHTML = `
-                            <div class="cert-seal" style="transform: scale(1.1); margin-bottom: 16px;">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #083d35;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            </div>
-                            <p style="font-weight: 700; margin-bottom: 4px; color: var(--text-primary);">Interactive Certificate Render Layer</p>
-                            <p style="font-size: 13px; max-width: 320px; color: var(--text-secondary);">Physical scan/document download will be added here once provided by Mollie.</p>
-                        `;
-
-                        modal.classList.add("active");
-                    });
-                    card.setAttribute("data-bound", "true");
-                });
-            }
-            bindCardClickHandlers();
-
-            // Close Modal
+            // Close Modal handlers
             modalClose.addEventListener("click", () => {
                 modal.classList.remove("active");
             });
@@ -1535,234 +1150,274 @@
                 }
             });
 
-            // 3. Dynamic PDF.js processing workflow
-            const uploadConfigs = [
+            // High-fidelity fallback credentials data when no folder contents exist
+            const fallbackCredentials = [
                 {
-                    key: "pdf1",
-                    input: document.getElementById("pdf1-file-input"),
-                    dropzone: document.getElementById("pdf1-dropzone"),
-                    wrapper: document.getElementById("pdf1-loaded-wrapper"),
-                    grid: document.getElementById("pdf1-pages-grid"),
-                    countLabel: document.getElementById("pdf1-page-count"),
-                    statusBadge: document.getElementById("pdf1-status-badge"),
-                    statusText: document.getElementById("pdf1-status-text"),
-                    removeBtn: document.getElementById("pdf1-remove-btn")
+                    fileName: "State Registered Physical Care Practitioner.pdf",
+                    title: "State Registered Physical Care Practitioner",
+                    isPlaceholder: true
                 },
                 {
-                    key: "pdf2",
-                    input: document.getElementById("pdf2-file-input"),
-                    dropzone: document.getElementById("pdf2-dropzone"),
-                    wrapper: document.getElementById("pdf2-loaded-wrapper"),
-                    grid: document.getElementById("pdf2-pages-grid"),
-                    countLabel: document.getElementById("pdf2-page-count"),
-                    statusBadge: document.getElementById("pdf2-status-badge"),
-                    statusText: document.getElementById("pdf2-status-text"),
-                    removeBtn: document.getElementById("pdf2-remove-btn")
+                    fileName: "Certified Posture Specialist.pdf",
+                    title: "Certified Posture Specialist (CPS)",
+                    isPlaceholder: true
+                },
+                {
+                    fileName: "Functional Movement Specialist.pdf",
+                    title: "Functional Movement Specialist (FMS)",
+                    isPlaceholder: true
                 }
             ];
 
-            const emptyState = document.getElementById("pdf-empty-state");
+            // Helper to clean file names into gorgeous titles
+            function cleanFileName(fileName) {
+                let name = fileName.replace(/\.[^/.]+$/, ""); // Strip extension
+                name = decodeURIComponent(name); // Decode path symbols like %20
+                name = name.replace(/[_-]/g, " "); // Replace dashes/underscores with spaces
+                
+                // Convert to beautiful Title Case
+                return name.split(' ')
+                           .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                           .join(' ');
+            }
 
-            // Setup drag & drop and change handlers
-            uploadConfigs.forEach(cfg => {
-                const input = cfg.input;
-                const dropzone = cfg.dropzone;
+            // Centralized loading mechanism
+            function initializePortfolio() {
+                fetch('/certs/manifest.json')
+                    .then(res => {
+                        if (!res.ok) throw new Error("Could not fetch manifest.json");
+                        return res.json();
+                    })
+                    .then(files => {
+                        if (!Array.isArray(files) || files.length === 0) {
+                            throw new Error("Empty manifest array received");
+                        }
+                        renderFiles(files, false);
+                    })
+                    .catch(err => {
+                        console.log("Loading placeholder board visual standards due to:", err.message);
+                        renderFiles(fallbackCredentials, true);
+                    });
+            }
 
-                // Open file browser on dropzone click
-                dropzone.addEventListener("click", (e) => {
-                    if (e.target !== input && !e.target.closest(".pdf-file-badge")) {
-                        input.click();
+            // Render files dynamically inside the simplified certificates-grid
+            function renderFiles(items, isFallback) {
+                const grid = document.getElementById("unified-certs-grid");
+                grid.innerHTML = ""; // Clear loaders
+
+                items.forEach((item, index) => {
+                    const fileName = isFallback ? item.fileName : item;
+                    const cleanTitle = isFallback ? item.title : cleanFileName(fileName);
+                    const fileUrl = isFallback ? "#" : `/certs/${encodeURIComponent(fileName)}`;
+                    const cardId = `cert-${index}`;
+                    const isPdf = fileName.toLowerCase().endsWith('.pdf');
+
+                    const card = document.createElement("div");
+                    card.className = "cert-card animate-slide-up";
+                    card.style.cursor = isFallback ? "default" : "pointer";
+
+                    if (isFallback) {
+                        // Render extremely aesthetic default placeholder cards
+                        card.innerHTML = `
+                            <div class="cert-visual-zone">
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--brand-color);">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.85;">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        <circle cx="12" cy="11" r="3"></circle>
+                                        <path d="M12 14v4"></path>
+                                    </svg>
+                                    <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); opacity: 0.7;">Verified Plaque</span>
+                                </div>
+                            </div>
+                            <div class="cert-card-title">${cleanTitle}</div>
+                        `;
+                        grid.appendChild(card);
+                    } else {
+                        // Render live file cards
+                        card.innerHTML = `
+                            <div class="cert-visual-zone" id="visual-${cardId}">
+                                <div class="loading-overlay-spinner" id="spinner-${cardId}">
+                                    <div class="spinner" style="width: 24px; height: 24px;"></div>
+                                </div>
+                                ${isPdf ? 
+                                    `<canvas id="canvas-${cardId}" style="display: none;"></canvas>` : 
+                                    `<img id="img-${cardId}" src="${fileUrl}" alt="${cleanTitle}" style="display: none;" />`
+                                }
+                            </div>
+                            <div class="cert-card-title">${cleanTitle}</div>
+                        `;
+
+                        grid.appendChild(card);
+
+                        const spinner = document.getElementById(`spinner-${cardId}`);
+
+                        if (isPdf) {
+                            const canvas = document.getElementById(`canvas-${cardId}`);
+                            pdfjsLib.getDocument(fileUrl).promise.then(pdf => {
+                                return pdf.getPage(1).then(page => {
+                                    const viewport = page.getViewport({ scale: 0.7 });
+                                    const context = canvas.getContext('2d');
+                                    canvas.height = viewport.height;
+                                    canvas.width = viewport.width;
+
+                                    const renderContext = {
+                                        canvasContext: context,
+                                        viewport: viewport
+                                    };
+
+                                    return page.render(renderContext).promise.then(() => {
+                                        if (spinner) spinner.style.display = "none";
+                                        if (canvas) canvas.style.display = "block";
+                                    });
+                                });
+                            }).catch(err => {
+                                console.error("Error drawing first PDF page:", err);
+                                if (spinner) spinner.style.display = "none";
+                                const visualZone = document.getElementById(`visual-${cardId}`);
+                                visualZone.innerHTML = `
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 12px; text-align: center;">
+                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand-color);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                                        <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">Click to Open PDF</span>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            const img = document.getElementById(`img-${cardId}`);
+                            img.onload = () => {
+                                if (spinner) spinner.style.display = "none";
+                                img.style.display = "block";
+                            };
+                            img.onerror = () => {
+                                if (spinner) spinner.style.display = "none";
+                                const visualZone = document.getElementById(`visual-${cardId}`);
+                                visualZone.innerHTML = `
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 12px; text-align: center;">
+                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand-color);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                        <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">Click to View Image</span>
+                                    </div>
+                                `;
+                            };
+                        }
+
+                        // Attach preview light-box overlay modal click handler
+                        card.addEventListener("click", () => {
+                            mTitle.textContent = cleanTitle;
+                            mOrg.textContent = "VERIFIED FILE ARCHIVE";
+                            modal.classList.add("active");
+                            displayFileInModal(fileUrl, cleanTitle, isPdf);
+                        });
                     }
                 });
+            }
 
-                // Styling highlights
-                ["dragenter", "dragover"].forEach(evt => {
-                    dropzone.addEventListener(evt, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        dropzone.style.borderColor = "var(--brand-color)";
-                        dropzone.style.background = "rgba(18, 91, 80, 0.05)";
-                    }, false);
-                });
+            // High resolution display inside the popup Lightbox frame
+            let currentPdfInstance = null;
+            let currentPageNumber = 1;
 
-                ["dragleave", "drop"].forEach(evt => {
-                    dropzone.addEventListener(evt, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        dropzone.style.borderColor = "rgba(18, 91, 80, 0.15)";
-                        dropzone.style.background = "var(--surface-color)";
-                    }, false);
-                });
+            function displayFileInModal(url, cleanedTitle, isPdf) {
+                const canvasWrapper = document.getElementById("modal-canvas-wrapper");
+                const modalPagination = document.getElementById("modal-pagination");
+                const modalDownloadContainer = document.getElementById("modal-download-container");
 
-                // Drop file payload reception
-                dropzone.addEventListener("drop", (e) => {
-                    const dt = e.dataTransfer;
-                    const files = dt.files;
-                    if (files.length && files[0].type === "application/pdf") {
-                        input.files = files;
-                        processPDFFile(files[0], cfg);
-                    }
-                }, false);
+                canvasWrapper.innerHTML = "";
+                modalPagination.innerHTML = "";
+                modalDownloadContainer.innerHTML = "";
 
-                // Change payload reception
-                input.addEventListener("change", (e) => {
-                    const files = e.target.files;
-                    if (files.length) {
-                        processPDFFile(files[0], cfg);
-                    }
-                });
+                // Show download CTA directly
+                modalDownloadContainer.innerHTML = `
+                    <a href="${url}" download class="modal-ctrl-btn" style="background: var(--brand-color); color: #fff; border-color: var(--brand-color); display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 10px 18px; border-radius: 30px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        <span>Download Original File</span>
+                    </a>
+                `;
 
-                // Remove / reset payload button
-                cfg.removeBtn.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    resetPDFConfig(cfg);
-                });
-            });
+                if (isPdf) {
+                    canvasWrapper.innerHTML = `
+                        <div class="loading-overlay-spinner" id="modal-spinner">
+                            <div class="spinner"></div>
+                            <span style="font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-top: 8px;">COMPILING HIGH-RESOLUTION SCAN...</span>
+                        </div>
+                        <canvas id="modal-pdf-canvas" style="max-width: 100%; height: auto; max-height: 65vh; margin: 0 auto; display: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></canvas>
+                    `;
+                    const spinner = document.getElementById("modal-spinner");
+                    const modalCanvas = document.getElementById("modal-pdf-canvas");
 
-            // Master Reset Config Function
-            function resetPDFConfig(cfg) {
-                cfg.input.value = "";
-                pdfDocs[cfg.key] = null;
-                pdfNames[cfg.key] = "";
-                cfg.wrapper.style.display = "none";
-                cfg.grid.innerHTML = "";
-                cfg.countLabel.textContent = "0 Pages";
-                cfg.statusBadge.style.display = "none";
-                cfg.statusText.textContent = "No file loaded";
+                    pdfjsLib.getDocument(url).promise.then(pdfInstance => {
+                        currentPdfInstance = pdfInstance;
+                        currentPageNumber = 1;
 
-                // Check if both empty to restore main placeholder
-                if (!pdfDocs.pdf1 && !pdfDocs.pdf2) {
-                    emptyState.style.display = "block";
+                        function renderModalPage(pageNum) {
+                            if (spinner) spinner.style.display = "flex";
+                            if (modalCanvas) modalCanvas.style.display = "none";
+
+                            pdfInstance.getPage(pageNum).then(page => {
+                                const viewport = page.getViewport({ scale: 1.4 });
+                                const context = modalCanvas.getContext('2d');
+                                modalCanvas.height = viewport.height;
+                                modalCanvas.width = viewport.width;
+
+                                const renderContext = {
+                                    canvasContext: context,
+                                    viewport: viewport
+                                };
+
+                                return page.render(renderContext).promise.then(() => {
+                                    if (spinner) spinner.style.display = "none";
+                                    if (modalCanvas) modalCanvas.style.display = "block";
+                                });
+                            });
+
+                            renderPaginationControls();
+                        }
+
+                        function renderPaginationControls() {
+                            if (pdfInstance.numPages <= 1) {
+                                modalPagination.innerHTML = "";
+                                return;
+                            }
+
+                            modalPagination.innerHTML = `
+                                <button id="modal-prev-btn" class="modal-ctrl-btn" style="font-size: 11px; padding: 6px 14px; border-radius: 30px;" ${currentPageNumber === 1 ? 'disabled style="opacity: 0.5; pointer-events: none;"' : ''}>
+                                    Prev
+                                </button>
+                                <span style="font-size: 13px; font-weight: 700; color: var(--text-primary); margin: 0 6px;">
+                                    Page ${currentPageNumber} of ${pdfInstance.numPages}
+                                </span>
+                                <button id="modal-next-btn" class="modal-ctrl-btn" style="font-size: 11px; padding: 6px 14px; border-radius: 30px;" ${currentPageNumber === pdfInstance.numPages ? 'disabled style="opacity: 0.5; pointer-events: none;"' : ''}>
+                                    Next
+                                </button>
+                            `;
+
+                            document.getElementById("modal-prev-btn")?.addEventListener("click", () => {
+                                if (currentPageNumber > 1) {
+                                    currentPageNumber--;
+                                    renderModalPage(currentPageNumber);
+                                }
+                            });
+
+                            document.getElementById("modal-next-btn")?.addEventListener("click", () => {
+                                if (currentPageNumber < pdfInstance.numPages) {
+                                    currentPageNumber++;
+                                    renderModalPage(currentPageNumber);
+                                }
+                            });
+                        }
+
+                        renderModalPage(currentPageNumber);
+
+                    }).catch(err => {
+                        console.error("Error loading full resolution PDF inside modal:", err);
+                        canvasWrapper.innerHTML = `<p style="padding: 24px; color: var(--text-secondary);">Could not load PDF document scanner.</p>`;
+                    });
+                } else {
+                    canvasWrapper.innerHTML = `
+                        <img src="${url}" alt="${cleanedTitle}" style="max-width: 100%; max-height: 65vh; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 0 auto; display: block;" />
+                    `;
                 }
             }
 
-            // Central PDF parsing and element generator
-            function processPDFFile(file, cfg) {
-                const reader = new FileReader();
-                pdfNames[cfg.key] = file.name;
-
-                // Update uploader badge status immediately
-                cfg.statusText.textContent = file.name.length > 20 ? file.name.substring(0, 18) + "..." : file.name;
-                cfg.statusBadge.style.display = "inline-flex";
-                emptyState.style.display = "none";
-
-                reader.onload = function() {
-                    const typedarray = new Uint8Array(this.result);
-                    
-                    // Call PDFJS loader
-                    pdfjsLib.getDocument(typedarray).promise.then(function(pdfInstance) {
-                        pdfDocs[cfg.key] = pdfInstance;
-                        cfg.grid.innerHTML = ""; // clean grid
-                        cfg.countLabel.textContent = `${pdfInstance.numPages} ${pdfInstance.numPages === 1 ? 'Page' : 'Pages'}`;
-                        cfg.wrapper.style.display = "block";
-
-                        // Loop pages and output section block cards
-                        for (let pageNum = 1; pageNum <= pdfInstance.numPages; pageNum++) {
-                            createPDFPageCard(pdfInstance, pageNum, cfg, file.name);
-                        }
-                    }).catch(err => {
-                        console.error("PDF.js load failure:", err);
-                        cfg.statusText.textContent = "Load Failure";
-                        cfg.statusText.style.color = "#ef4444";
-                    });
-                };
-
-                reader.readAsArrayBuffer(file);
-            }
-
-            // High-Craft section block card factory for each PDF page
-            function createPDFPageCard(pdfInstance, pageNum, cfg, fileName) {
-                // Outer card structure matching ActiveHorizons premium styling
-                const card = document.createElement("div");
-                card.className = "cert-card clickable-cert animate-slide-up";
-                card.style.cursor = "pointer";
-
-                // Inner content layout
-                card.innerHTML = `
-                    <div class="sweep-overlay"></div>
-                    <div class="cert-visual-zone bg-cert-placeholder pdf-canvas-container" style="background: #ffffff; padding: 0; min-height: 200px; display: flex; align-items:center; justify-content:center;">
-                        <div class="loading-overlay-spinner" id="spinner-${cfg.key}-${pageNum}">
-                            <div class="spinner"></div>
-                            <span style="font-size: 11px; font-weight: 700; color: var(--text-secondary);">RENDERING PAGE</span>
-                        </div>
-                        <canvas id="canvas-${cfg.key}-${pageNum}" style="width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 12px;"></canvas>
-                    </div>
-                    <div class="cert-details">
-                        <div class="cert-badge-row">
-                            <span class="cert-status-badge"><span></span>Page ${pageNum} of ${pdfInstance.numPages}</span>
-                            <span class="cert-auth-id">Cred: #${cfg.key.toUpperCase()}-P${pageNum}</span>
-                        </div>
-                        <h3 class="cert-title">${pageNum === 1 ? 'Primary Credential Entry' : 'Accredited Section ' + pageNum}</h3>
-                        <p class="cert-desc" style="font-size: 13px;">Extracted section page from clinical portfolio. Verified for athletic recovery support.</p>
-                    </div>
-                    <div class="cert-institution-footer">
-                        <span class="cert-inst-tag text-truncate" style="max-width: 160px;">${fileName}</span>
-                        <span class="cert-issue-date">Dynamic Page</span>
-                    </div>
-                `;
-
-                cfg.grid.appendChild(card);
-
-                const spinner = document.getElementById(`spinner-${cfg.key}-${pageNum}`);
-                const canvas = document.getElementById(`canvas-${cfg.key}-${pageNum}`);
-                const context = canvas.getContext('2d');
-
-                // Render page viewport to Canvas
-                pdfInstance.getPage(pageNum).then(function(page) {
-                    // Render scale 1.0 for the thumbnail grid to preserve performance
-                    const viewport = page.getViewport({ scale: 1.0 });
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    const renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-
-                    page.render(renderContext).promise.then(function() {
-                        if (spinner) spinner.style.display = "none";
-                    });
-                });
-
-                // Act on page Section clicked -> populates modal with High-Res viewport layout
-                card.addEventListener("click", () => {
-                    mTitle.textContent = `${fileName} - Page ${pageNum}`;
-                    mOrg.textContent = `Uploaded Custom Document Segment (File Track: ${cfg.key === 'pdf1' ? 'Clinical Licensure' : 'Specialty Certifications'})`;
-                    mDesc.textContent = `This content block renders page ${pageNum} extracted directly from your PDF upload: "${fileName}". Prospective care recipients can review physical seals, board marks, and institution signatures interactively.`;
-
-                    // Generate a high-resolution canvas within modal display frame
-                    modalDisplayFrame.innerHTML = `
-                        <div class="loading-overlay-spinner" id="modal-spinner">
-                            <div class="spinner"></div>
-                            <span style="font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-top: 8px;">RENDERING HIGH RESOLUTION PREVIEW...</span>
-                        </div>
-                        <canvas id="modal-pdf-canvas" style="max-width: 100%; height: auto; max-height: 70vh; margin: 0 auto; display: block; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></canvas>
-                    `;
-
-                    modal.classList.add("active");
-
-                    const modalSpinner = document.getElementById("modal-spinner");
-                    const modalCanvas = document.getElementById("modal-pdf-canvas");
-                    const modalContext = modalCanvas.getContext('2d');
-
-                    // Request higher resolution viewport (scale 1.8) for beautiful crisp lines in modal
-                    pdfInstance.getPage(pageNum).then(function(modalPage) {
-                        const modalViewport = modalPage.getViewport({ scale: 1.8 });
-                        modalCanvas.height = modalViewport.height;
-                        modalCanvas.width = modalViewport.width;
-
-                        const modalRenderContext = {
-                            canvasContext: modalContext,
-                            viewport: modalViewport
-                        };
-
-                        modalPage.render(modalRenderContext).promise.then(function() {
-                            if (modalSpinner) modalSpinner.style.display = "none";
-                        });
-                    });
-                });
-            }
+            // Run on Load
+            initializePortfolio();
         });
     </script>
 </body>
