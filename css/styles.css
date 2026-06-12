@@ -144,10 +144,8 @@ a:focus, button:focus, input:focus {
     color: var(--ocean-teal);
 }
 
-/* Hide desktop elements on mobile */
 .mobile-only { display: none; }
 
-/* Pure CSS Hamburger Menu */
 .mobile-toggle-checkbox { display: none; }
 .mobile-toggle-label {
     display: none;
@@ -218,9 +216,6 @@ h1 {
     margin-bottom: 10px;
 }
 
-/* =========================================
-   BUTTONS & ACTIONS
-   ========================================= */
 .hero-actions {
     display: flex;
     gap: 20px;
@@ -300,7 +295,6 @@ h1 {
     color: #2c4a41;
 }
 
-/* Horizontal Slider Wrapper */
 .carousel-wrapper {
     position: relative;
     display: flex;
@@ -313,16 +307,15 @@ h1 {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    padding: 10px 0 30px 0; /* Padding for box-shadows and scrollbar */
-    scrollbar-width: none; /* Hides scrollbar in Firefox */
+    padding: 10px 0 30px 0; 
+    scrollbar-width: none; 
 }
 
 .carousel-track::-webkit-scrollbar {
-    display: none; /* Hides scrollbar in Chrome/Safari */
+    display: none; 
 }
 
 .success-card {
-    /* Mobile defaults to 1 card per view */
     flex: 0 0 calc(100% - 10px); 
     scroll-snap-align: center;
     background: var(--glass-bg);
@@ -339,12 +332,10 @@ h1 {
 
 @media (min-width: 768px) {
     .success-card {
-        /* Desktop shows 2 cards per view */
         flex: 0 0 calc(50% - 15px); 
     }
 }
 
-/* Slider Navigation Buttons */
 .carousel-btn {
     background: var(--ocean-teal);
     color: var(--white);
@@ -416,7 +407,6 @@ h1 {
     transform: scale(1.05); 
 }
 
-/* Toggle State controlled by Javascript */
 .image-transition-box.show-after .img-after {
     opacity: 1;
     transform: scale(1);
@@ -427,7 +417,6 @@ h1 {
     transform: scale(0.95);
 }
 
-/* Badges & Overlays */
 .status-badge {
     position: absolute;
     top: 15px;
@@ -473,7 +462,6 @@ h1 {
     -webkit-backdrop-filter: blur(4px);
 }
 
-/* State changes for badges when toggled */
 .image-transition-box.show-after .badge-before {
     opacity: 0;
 }
@@ -482,211 +470,6 @@ h1 {
     opacity: 1;
 }
 
-/* =========================================
-   IMAGE TRANSITION INTERACTION
-   ========================================= */
-.image-transition-box {
-    position: relative;
-    width: 100%;
-    /* Changed from 4 / 3 to 3 / 4 to make the window taller for portrait photos */
-    aspect-ratio: 3 / 4; 
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    outline: none; 
-}
-
-.image-transition-box:focus-visible {
-    box-shadow: 0 0 0 4px var(--ocean-teal);
-}
-
-.image-transition-box img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.img-before {
-    z-index: 1;
-    opacity: 1;
-    transform: scale(1);
-}
-
-.img-after {
-    z-index: 2;
-    opacity: 0;
-    transform: scale(1.05); 
-}
-
-/* Hover effect specifically restored for devices with a mouse (Desktop).
-  Mobile devices will ignore this and rely on the Javascript tap-to-lock.
-*/
-@media (hover: hover) and (pointer: fine) {
-    .image-transition-box:hover .img-after,
-    .image-transition-box:focus .img-after {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .image-transition-box:hover .img-before,
-    .image-transition-box:focus .img-before {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-}
-
-/* Lock State controlled by Javascript (Click/Tap) */
-.image-transition-box.locked-after .img-after {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.image-transition-box.locked-after .img-before {
-    opacity: 0;
-    transform: scale(0.95);
-}
-
-/* =========================================
-   BADGES & HINTS OVERLAYS
-   ========================================= */
-.status-badge {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    transition: opacity 0.6s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.badge-before {
-    background: rgba(251, 249, 244, 0.85);
-    color: var(--deep-palm);
-    z-index: 3;
-}
-
-.badge-after {
-    background: var(--ocean-teal);
-    color: var(--white);
-    z-index: 4;
-    opacity: 0;
-}
-
-.interaction-hint {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: rgba(10, 46, 34, 0.7);
-    color: var(--white);
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 5;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    transition: opacity 0.4s ease;
-}
-
-/* Hover interactions for badges (Desktop only) */
-@media (hover: hover) and (pointer: fine) {
-    .image-transition-box:hover .badge-before,
-    .image-transition-box:focus .badge-before,
-    .image-transition-box:hover .interaction-hint,
-    .image-transition-box:focus .interaction-hint {
-        opacity: 0;
-    }
-
-    .image-transition-box:hover .badge-after,
-    .image-transition-box:focus .badge-after {
-        opacity: 1;
-    }
-}
-
-/* Lock state hides the hint and before badge, shows after badge */
-.image-transition-box.locked-after .badge-before,
-.image-transition-box.locked-after .interaction-hint {
-    opacity: 0;
-}
-
-.image-transition-box.locked-after .badge-after {
-    opacity: 1;
-}
-
-/* =========================================
-   BADGES & HINTS OVERLAYS
-   ========================================= */
-.status-badge {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    transition: opacity 0.6s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.badge-before {
-    background: rgba(251, 249, 244, 0.85);
-    color: var(--deep-palm);
-    z-index: 3;
-}
-
-.badge-after {
-    background: var(--ocean-teal);
-    color: var(--white);
-    z-index: 4;
-    opacity: 0;
-}
-
-.interaction-hint {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: rgba(10, 46, 34, 0.7);
-    color: var(--white);
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 5;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    transition: opacity 0.4s ease;
-}
-
-/* Lock state hides the hint and before badge, shows after badge */
-.image-transition-box.locked-after .badge-before,
-.image-transition-box.locked-after .interaction-hint {
-    opacity: 0;
-}
-
-.image-transition-box.locked-after .badge-after {
-    opacity: 1;
-}
-
-/* =========================================
-   TYPOGRAPHY: QUOTES
-   ========================================= */
 .client-quote {
     font-family: var(--font-display);
     font-size: 1.25rem;

@@ -37,7 +37,7 @@
             <ul class="nav-links">
                 <li><a href="#about">Meet Mollie</a></li>
                 <li><a href="#services">Therapy Services</a></li>
-                <li><a href="#success">Success Stories</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
                 <li class="mobile-only"><a href="#contact" class="btn-secondary">Book Consultation</a></li>
             </ul>
 
@@ -153,7 +153,6 @@
                         </div>
                         <blockquote class="client-quote">Testimonials coming soon</blockquote>
                     </div>
-
                 </div>
 
                 <button class="carousel-btn next-btn" aria-label="Next Story">
@@ -162,7 +161,6 @@
             </div>
         </div>
     </section>
-
 
     <footer class="site-footer">
         <div class="footer-container">
@@ -221,10 +219,8 @@
             
             transitionBoxes.forEach(box => {
                 box.addEventListener("click", function() {
-                    // Toggles the class back and forth on click
                     this.classList.toggle("show-after");
                     
-                    // Updates the hint text dynamically for accessibility
                     const hintText = this.querySelector(".hint-text");
                     if (this.classList.contains("show-after")) {
                         hintText.textContent = "Tap to see Before";
@@ -241,19 +237,16 @@
 
             if(track && prevBtn && nextBtn) {
                 prevBtn.addEventListener('click', () => {
-                    // Calculates the width of one card to scroll smoothly
                     const cardWidth = track.querySelector('.success-card').offsetWidth;
-                    // Scrolls left by one card + gap (30px)
                     track.scrollBy({ left: -(cardWidth + 30), behavior: 'smooth' }); 
                 });
 
                 nextBtn.addEventListener('click', () => {
                     const cardWidth = track.querySelector('.success-card').offsetWidth;
-                    // Scrolls right by one card + gap (30px)
                     track.scrollBy({ left: (cardWidth + 30), behavior: 'smooth' });
                 });
             }
         });
     </script>
 </body>
-</html>  
+</html>
