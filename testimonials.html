@@ -7,38 +7,229 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* =========================================
+           APPLE-INSPIRED THEME VARIABLES
+           ========================================= */
+        :root {
+            --bg-color: #fbfbfd;
+            --surface-color: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --brand-color: #007d6a;
+            --brand-hover: #006050;
+            --nav-bg: rgba(251, 251, 253, 0.75);
+            --nav-border: rgba(0, 0, 0, 0.05);
+            --glass-blur: saturate(180%) blur(24px);
+            --font-main: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* =========================================
+           RESET & BASE
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 17px; line-height: 1.47059; font-weight: 400; letter-spacing: -0.022em;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        a:focus-visible, button:focus-visible { outline: 3px solid rgba(0, 125, 106, 0.5); outline-offset: 2px; }
+        .container { width: 87.5%; max-width: 980px; margin: 0 auto; }
+
+        /* =========================================
+           PREMIUM GLASS NAVIGATION
+           ========================================= */
+        .glass-nav-container {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: var(--nav-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--nav-border);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.02);
+            z-index: 1000; height: 60px;
+            display: flex; align-items: center; transition: all 0.3s ease;
+        }
+        .glass-nav {
+            width: 100%; max-width: 1024px; margin: 0 auto; padding: 0 22px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { 
+            font-size: 20px; font-weight: 600; letter-spacing: -0.015em; color: var(--text-primary); 
+            display: flex; align-items: center; gap: 8px; transition: opacity 0.3s ease;
+        }
+        .logo:hover { opacity: 0.7; }
+        
+        .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
+        .nav-links a { 
+            font-size: 14px; font-weight: 500; color: var(--text-primary); opacity: 0.8; 
+            transition: all 0.25s ease; letter-spacing: -0.01em; padding: 8px 16px; border-radius: 980px;
+        }
+        .nav-links a:hover { opacity: 1; background-color: rgba(0, 0, 0, 0.05); }
+
+        /* Buttons & Mobile Menu */
+        .mobile-only { display: none; }
+        .mobile-toggle-checkbox { display: none; }
+        .mobile-toggle-label { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 10px 0; z-index: 1001; }
+        .mobile-toggle-label span { display: block; width: 20px; height: 1.5px; background-color: var(--text-primary); transition: 0.3s ease; }
+        
+        .btn-primary, .btn-primary-small, .btn-secondary {
+            display: inline-block; background-color: var(--brand-color); color: #fff !important;
+            border-radius: 980px; font-weight: 500; text-align: center; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); border: 1px solid transparent;
+        }
+        .btn-primary-small { padding: 8px 18px; font-size: 13px; margin-left: 8px;}
+        .btn-primary-small:hover { background-color: var(--brand-hover); transform: scale(1.02); }
+
+        /* =========================================
+           TESTIMONIALS PREMIUM HERO
+           ========================================= */
+        .testimonial-hero {
+            position: relative;
+            padding: 180px 0 100px;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        /* Floating background orbs specific to this hero */
+        .hero-glow-teal { position: absolute; top: -100px; left: -50px; width: 400px; height: 400px; background: rgba(0, 125, 106, 0.15); filter: blur(80px); border-radius: 50%; z-index: -1; }
+        .hero-glow-blue { position: absolute; bottom: -50px; right: -50px; width: 350px; height: 350px; background: rgba(0, 180, 219, 0.1); filter: blur(80px); border-radius: 50%; z-index: -1; }
+
+        .testimonial-hero h1 {
+            font-size: clamp(48px, 8vw, 76px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            /* Premium Apple Gradient Text */
+            background: linear-gradient(135deg, var(--brand-color) 0%, #00b4db 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .hero-subtext {
+            font-size: clamp(20px, 3vw, 24px); 
+            color: var(--text-secondary); 
+            max-width: 650px; 
+            margin: 0 auto;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+
+        /* =========================================
+           TESTIMONIALS GRID
+           ========================================= */
+        .testimonials-grid {
+            display: grid; grid-template-columns: 1fr; gap: 28px; padding: 40px 0 120px;
+        }
+        @media (min-width: 768px) {
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+        }
+
+        .testimonial-card {
+            background-color: var(--surface-color); border-radius: 28px; padding: 48px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex; flex-direction: column; height: 100%;
+            position: relative; overflow: hidden;
+        }
+        
+        /* Premium subtle quote watermark behind text */
+        .testimonial-card::before {
+            content: '"'; position: absolute; top: 10px; right: 20px; font-size: 140px;
+            font-family: serif; color: var(--brand-color); opacity: 0.03; line-height: 1;
+        }
+
+        .testimonial-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+
+        .testimonial-stars { color: var(--brand-color); font-size: 19px; letter-spacing: 3px; margin-bottom: 24px; }
+        .testimonial-quote {
+            font-size: 20px; line-height: 1.5; color: var(--text-primary);
+            margin-bottom: 40px; flex-grow: 1; letter-spacing: -0.015em; font-weight: 400;
+        }
+        .testimonial-author { display: flex; flex-direction: column; border-top: 1px solid #f5f5f7; padding-top: 24px; }
+        .author-name { font-weight: 600; font-size: 17px; color: var(--text-primary); letter-spacing: -0.01em; }
+        .author-detail { font-size: 15px; color: var(--text-secondary); margin-top: 4px; }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        .site-footer { background-color: var(--bg-color); padding: 100px 20px 40px; text-align: center; }
+        .footer-heading { font-size: 32px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.015em; }
+        .footer-subtext { font-size: 19px; color: var(--text-secondary); margin-bottom: 40px; }
+        .contact-pills-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 56px; }
+        .contact-pill {
+            display: flex; align-items: center; gap: 10px; background: var(--surface-color); color: var(--text-primary);
+            font-weight: 500; font-size: 15px; padding: 16px 28px; border-radius: 980px; box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .contact-icon { color: var(--brand-color); transition: color 0.3s ease; }
+        .contact-pill:hover { border-color: rgba(0,0,0,0.1); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+
+        .wrapper { display: inline-flex; list-style: none; gap: 16px; margin-bottom: 40px; }
+        .wrapper .icon {
+            background: var(--surface-color); border-radius: 50%; width: 48px; height: 48px; display: flex; justify-content: center; align-items: center;
+            border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 8px rgba(0,0,0,0.02); cursor: pointer; transition: all 0.3s ease; color: var(--text-primary);
+        }
+        .wrapper .icon:hover { border-color: transparent; color: #fff; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .wrapper .facebook:hover { background: #1877f2; }
+        .wrapper .twitter:hover { background: #1da1f2; }
+        .wrapper .instagram:hover { background: #e4405f; }
+        .footer-bottom { border-top: 1px solid #d2d2d7; padding-top: 24px; font-size: 13px; color: var(--text-secondary); }
+
+        /* Animations & Mobile */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .animate-slide-up { opacity: 0; animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+
+        @media (max-width: 850px) {
+            .mobile-toggle-label { display: flex; }
+            .desktop-only { display: none; }
+            .mobile-only { display: block; margin-top: 20px; }
+            .nav-links {
+                position: absolute; top: 60px; left: 0; width: 100%;
+                background: rgba(255,255,255,0.95); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); 
+                flex-direction: column; gap: 0; padding: 0 22px 22px; border-bottom: 1px solid var(--nav-border);
+                opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease;
+            }
+            .nav-links a { display: block; width: 100%; padding: 16px 0; border-radius: 0; border-bottom: 1px solid #f5f5f7; font-size: 17px; }
+            .nav-links a:hover { background-color: transparent; color: var(--brand-color); }
+            .mobile-toggle-checkbox:checked ~ .nav-links { opacity: 1; visibility: visible; transform: translateY(0); }
+            .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+            .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(2) { opacity: 0; }
+            .mobile-toggle-checkbox:checked ~ .mobile-toggle-label span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        }
+        @media (max-width: 768px) {
+            .contact-pills-wrapper { flex-direction: column; align-items: stretch; }
+            .contact-pill { justify-content: center; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="ambient-glow glow-sun"></div>
-    <div class="ambient-glow glow-teal"></div>
-    <div class="noise-overlay"></div>
-
     <header class="glass-nav-container animate-fade-in">
         <nav class="glass-nav">
-            <div class="logo">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ocean-teal);">
+            <a href="index.html" class="logo">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand-color);">
                     <path d="M12 22c4-4 8-9 8-14a8 8 0 1 0-16 0c0 5 4 10 8 14z"></path>
                     <path d="M12 22V12"></path>
                 </svg>
                 Active Horizons
-            </div>
+            </a>
 
             <input type="checkbox" id="mobile-toggle" class="mobile-toggle-checkbox" aria-label="Toggle Navigation">
             <label for="mobile-toggle" class="mobile-toggle-label">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </label>
 
             <ul class="nav-links">
                 <li><a href="index.html#about">Meet Mollie</a></li>
                 <li><a href="index.html#services">Therapy Services</a></li>
                 <li><a href="testimonials.html">Testimonials</a></li>
-                <li class="mobile-only"><a href="index.html#contact" class="btn-secondary">Book Consultation</a></li>
+                <li class="mobile-only"><a href="index.html#contact" class="btn-primary">Book Consultation</a></li>
             </ul>
 
             <div class="nav-cta desktop-only">
@@ -47,24 +238,105 @@
         </nav>
     </header>
 
-    <main style="min-height: 70vh;">
-        </main>
+    <main>
+        <!-- SPICED UP PREMIUM HERO -->
+        <section class="testimonial-hero">
+            <!-- Ambient blurred orbs -->
+            <div class="hero-glow-teal"></div>
+            <div class="hero-glow-blue"></div>
+            
+            <div class="container">
+                <h1 class="animate-slide-up">Client Testimonials.</h1>
+                <p class="hero-subtext animate-slide-up delay-1">Hear directly from the individuals who have regained their strength, mobility, and independence.</p>
+            </div>
+        </section>
+        
+        <div class="container">
+            <div class="testimonials-grid">
+                
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card animate-slide-up delay-1">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-quote">"Working with Mollie has been a complete game changer for my daily mobility. I finally have the confidence to walk around my neighborhood without fear of falling."</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">Margaret H.</span>
+                        <span class="author-detail">Delray Beach, FL</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card animate-slide-up delay-2">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-quote">"The in-home therapy sessions were exactly what I needed after my knee replacement. Mollie is patient, professional, and genuinely cares about your progress."</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">Robert T.</span>
+                        <span class="author-detail">Boca Raton, FL</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card animate-slide-up delay-3">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-quote">"I was struggling with severe back pain for months before finding Active Horizons. Now, I am back to playing golf and enjoying my retirement to the fullest."</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">William S.</span>
+                        <span class="author-detail">Boynton Beach, FL</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card animate-slide-up delay-4">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-quote">"Mollie's customized exercises helped me regain strength I thought was lost forever. I cannot recommend her services enough to anyone needing rehabilitation."</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">Eleanor D.</span>
+                        <span class="author-detail">Wellington, FL</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
 
     <footer class="site-footer">
-        <div class="footer-container">
+        <div class="container">
             <h2 class="footer-heading">Reach Out to Mollie</h2>
             <p class="footer-subtext">Ready to take the next step? Connect via phone, email, or follow our journey.</p>
             
             <div class="contact-pills-wrapper">
                 <a href="tel:+15551234567" class="contact-pill" aria-label="Call Mollie">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
                     <span>(555) 123-4567</span>
                 </a>
 
                 <a href="mailto:mollie@activehorizonsfl.com" class="contact-pill" aria-label="Email Mollie">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
@@ -74,19 +346,16 @@
 
             <ul class="wrapper">
                 <li class="icon facebook">
-                    <span class="tooltip">Facebook</span>
                     <svg viewBox="0 0 320 512" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
                     </svg>
                 </li>
                 <li class="icon twitter">
-                    <span class="tooltip">Twitter</span>
-                    <svg height="1.8em" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <svg height="1.4em" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                         <path d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"></path>
                     </svg>
                 </li>
                 <li class="icon instagram">
-                    <span class="tooltip">Instagram</span>
                     <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
                     </svg>
